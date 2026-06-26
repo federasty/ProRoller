@@ -17,6 +17,11 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        const event = new CustomEvent('menuToggle', { detail: { isOpen } });
+        window.dispatchEvent(event);
+    }, [isOpen]);
+
     const navLinks = [
         { name: 'Servicios', href: '#servicios' },
         { name: 'Nosotros', href: '#nuestrosTrabajos' },
