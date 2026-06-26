@@ -1,37 +1,36 @@
-# Pro-Roller 🎨
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-**Pro-Roller** es una landing page moderna para un negocio de cortinas roller. Inspirada en Pinterest, combina un diseño limpio con funcionalidades interactivas: carrusel de trabajos, modales informativos y formulario de contacto.
+## Getting Started
 
-## Tecnologías 🛠️
-- Angular 16 + TypeScript  
-- Angular Material  
-- RxJS  
-- SweetAlert2  
-- Lightslider (carrusel)  
-- Mat-video (videos)  
-- JQuery y Hammer.js  
+First, run the development server:
 
-## Funcionalidades principales ✨
-- **Secciones:** Servicios, Trabajos y Contacto  
-- **Modal:** Información adicional en ventanas emergentes  
-- **Carrusel:** Galería de trabajos visual  
-- **Diseño moderno:** Inspiración Pinterest  
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Servidor de desarrollo ⚡
-Ejecuta `ng serve` para iniciar un servidor de desarrollo.  
-Navega a `http://localhost:4200/`.  
-La aplicación se recargará automáticamente si modificas algún archivo de origen.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Generación de código
-Ejecuta `ng generate component nombre-componente` para generar un nuevo componente.  
-También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Build
-Ejecuta `ng build` para construir el proyecto.  
-Los archivos generados se almacenarán en el directorio `dist/`.  
-Usa el flag `--prod` para una build de producción.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Contribuciones 🤝
-Si deseas colaborar, abre un issue o envía un pull request.
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
