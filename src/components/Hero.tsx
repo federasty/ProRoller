@@ -2,6 +2,96 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+
+const VideoLogoCanvas = ({ src }: { src: string }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const animFrameRef = useRef<number>(0);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        if (!video || !canvas) return;
+
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (!ctx) return;
+
+        const draw = () => {
+            if (video.paused || video.ended) {
+                animFrameRef.current = requestAnimationFrame(draw);
+                return;
+            }
+
+            if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+            }
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+
+            // Make light pixels (white & grey checkerboard) transparent
+            // Keep dark pixels (the logo) opaque
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+
+                // Calculate brightness (0-255)
+                const brightness = (r + g + b) / 3;
+
+                if (brightness > 115) {
+                    // Light/mid pixel (white & grey checkerboard) → make fully transparent
+                    data[i + 3] = 0;
+                } else if (brightness > 60) {
+                    // Near-dark → partial transparency for smooth anti-aliased edges
+                    const alpha = Math.round(255 * (1 - (brightness - 60) / 55));
+                    data[i + 3] = alpha;
+                }
+                // Dark pixels (brightness <= 80) stay fully opaque
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+            animFrameRef.current = requestAnimationFrame(draw);
+        };
+
+        const handlePlay = () => {
+            animFrameRef.current = requestAnimationFrame(draw);
+        };
+
+        video.addEventListener('play', handlePlay);
+        // If video is already playing
+        if (!video.paused) {
+            animFrameRef.current = requestAnimationFrame(draw);
+        }
+
+        return () => {
+            video.removeEventListener('play', handlePlay);
+            cancelAnimationFrame(animFrameRef.current);
+        };
+    }, []);
+
+    return (
+        <div className="relative w-full aspect-video">
+            <video
+                ref={videoRef}
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
+            />
+            <canvas
+                ref={canvasRef}
+                className="w-full h-full object-contain"
+            />
+        </div>
+    );
+};
 
 const Hero = () => {
     return (
@@ -31,7 +121,7 @@ const Hero = () => {
                     "Transformamos la luz en confort para tu hogar"
                 </motion.p>
 
-                {/* Logo en el centro */}
+                {/* Logo animado (Video con chroma-key via Canvas) */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -40,15 +130,7 @@ const Hero = () => {
                 >
                     <div className="relative group w-full">
                         <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div className="relative aspect-[2/1] w-full">
-                            <Image
-                                src="/logo_proroller.png"
-                                alt="ProRoller Logo"
-                                fill
-                                className="object-contain transition-transform duration-700 hover:scale-105"
-                                priority
-                            />
-                        </div>
+                        <VideoLogoCanvas src="/quiero_que_la_ueda_de_atras_os_sin_logo.mp4" />
                     </div>
                 </motion.div>
 
