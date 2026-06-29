@@ -179,7 +179,7 @@ const FloatingUruguayMap = () => {
             initial={{ opacity: 0, scale: 0.5, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
-            className="absolute bottom-6 left-3 z-[2] flex flex-col items-center gap-1.5"
+            className="fixed bottom-6 left-6 z-[99] flex flex-col items-center gap-1.5"
         >
             <span className="text-[8px] md:text-[10px] font-black text-gray-800 uppercase tracking-[0.15em] leading-tight text-center whitespace-nowrap">
                 Estamos en todo<br />el Uruguay
