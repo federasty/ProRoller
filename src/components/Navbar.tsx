@@ -25,6 +25,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Servicios', href: '#servicios' },
         { name: 'Nosotros', href: '#nuestrosTrabajos' },
+        { name: 'En Acción', href: '#videos-muestra' },
         { name: 'Contacto', href: '#contacto' },
     ];
 
@@ -34,7 +35,7 @@ const Navbar = () => {
         const targetId = href.replace('#', '');
         const elem = document.getElementById(targetId);
         if (elem) {
-            const offset = 80; // Offset for fixed header
+            const offset = 80;
             const elementPosition = elem.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -93,7 +94,7 @@ const Navbar = () => {
             opacity: 1,
             y: 0,
             transition: {
-                delay: 0.25, // Esperar a que las cortinas cierren el centro
+                delay: 0.35,
                 duration: 0.4,
                 ease: "easeOut" as any
             }
@@ -106,7 +107,7 @@ const Navbar = () => {
             opacity: 1,
             x: 0,
             transition: {
-                delay: 0.35 + (i * 0.08), // Sincronizado con el cierre de las cortinas
+                delay: 0.45 + (i * 0.08),
                 duration: 0.4,
                 ease: "easeOut" as any
             }
@@ -192,31 +193,49 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Premium Mobile Menu Overlay con Efecto Cortina */}
+            {/* Premium Mobile Menu Overlay con Efecto Cortina y Logo Partido */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 1, transition: { delay: 0.5 } }} // Esperar a que las cortinas se deslicen hacia afuera
+                        exit={{ opacity: 1, transition: { delay: 0.5 } }}
                         className="fixed inset-0 h-[100dvh] w-full z-[100] overflow-hidden pointer-events-none"
                     >
-                        {/* Cortina Izquierda */}
+                        {/* Cortina Izquierda con mitad izquierda del logo */}
                         <motion.div
                             variants={curtainLeftVariants}
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute top-0 left-0 w-1/2 h-full bg-white pointer-events-auto border-r border-gray-100/80"
-                        />
+                            className="absolute top-0 left-0 w-1/2 h-full bg-white pointer-events-auto overflow-hidden"
+                        >
+                            {/* Mitad izquierda del logo pegada al borde derecho de la cortina izquierda */}
+                            <div className="absolute top-[75px] right-0 w-[50px] h-[100px] overflow-hidden">
+                                <img
+                                    src="/logo_proroller.png"
+                                    alt=""
+                                    className="absolute top-0 left-0 w-[100px] h-[100px] max-w-none object-contain"
+                                />
+                            </div>
+                        </motion.div>
 
-                        {/* Cortina Derecha */}
+                        {/* Cortina Derecha con mitad derecha del logo */}
                         <motion.div
                             variants={curtainRightVariants}
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute top-0 right-0 w-1/2 h-full bg-white pointer-events-auto"
-                        />
+                            className="absolute top-0 right-0 w-1/2 h-full bg-white pointer-events-auto overflow-hidden"
+                        >
+                            {/* Mitad derecha del logo pegada al borde izquierdo de la cortina derecha */}
+                            <div className="absolute top-[75px] left-0 w-[50px] h-[100px] overflow-hidden">
+                                <img
+                                    src="/logo_proroller.png"
+                                    alt=""
+                                    className="absolute top-0 right-0 w-[100px] h-[100px] max-w-none object-contain"
+                                />
+                            </div>
+                        </motion.div>
 
                         {/* Contenido del Menú */}
                         <motion.div
@@ -224,7 +243,7 @@ const Navbar = () => {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute inset-0 h-full w-full flex flex-col pt-32 pb-12 pointer-events-auto z-10"
+                            className="absolute inset-0 h-full w-full flex flex-col pt-[240px] pb-12 pointer-events-auto z-10"
                         >
                             {/* Elegant background gradients */}
                             <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
@@ -232,8 +251,8 @@ const Navbar = () => {
                                 <div className="absolute bottom-[-10%] left-[-10%] w-[60%] aspect-square bg-primary/10 rounded-full blur-[100px]"></div>
                             </div>
 
-                            <div className="flex-1 flex flex-col justify-center px-8 relative z-10">
-                                <div className="space-y-6">
+                            <div className="flex-1 flex flex-col justify-start px-8 relative z-10">
+                                <div className="space-y-4">
                                     {navLinks.map((link, i) => (
                                         <motion.div
                                             key={link.name}
@@ -262,7 +281,7 @@ const Navbar = () => {
                                 <motion.div
                                     custom={navLinks.length}
                                     variants={linkVariants}
-                                    className="mt-12"
+                                    className="mt-8"
                                 >
                                     <a
                                         href="https://wa.me/59895113560?text=Hola%20ProRoller!%20Me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20gratis%20para%20unas%20cortinas."
@@ -278,7 +297,7 @@ const Navbar = () => {
                                 </motion.div>
                             </div>
 
-                            {/* Social Footer Revamped */}
+                            {/* Social Footer */}
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -287,7 +306,7 @@ const Navbar = () => {
                             >
                                 <div className="h-px w-20 bg-gray-100 mb-2"></div>
                                 <div className="space-y-1">
-                                    <p className="font-black text-gray-900 tracking-[0.2em] text-xs uppercase">Pro Roller Uruguay</p>
+                                    <p className="font-black text-gray-900 tracking-[0.2em] text-xs uppercase">Pro Roller</p>
                                     <p className="text-gray-400 text-sm font-medium">Seguinos en nuestras redes sociales</p>
                                 </div>
 
