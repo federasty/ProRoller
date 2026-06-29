@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "ProRoller - Cortinas Roller y Tradicionales",
   description: "Confección, instalación y automatización de cortinas roller y tradicionales a medida.",
   keywords: "Cortinas, enrollar, tradicionales, automaticos, automatismo, reparacion, a medida, instalación, roller, screen, black out, bambú",
+  icons: {
+    icon: "/logo_proroller.png",
+    apple: "/logo_proroller.png",
+  },
 };
 
 export default function RootLayout({
