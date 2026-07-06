@@ -174,7 +174,7 @@ const ProductCard = ({
                 y: -8,
                 transition: { duration: 0.3, ease: 'easeOut' },
             }}
-            className="group relative bg-white rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,123,94,0.14)] transition-all duration-500 border border-gray-100 hover:border-primary/25 flex flex-col overflow-hidden"
+            className="group relative bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,123,94,0.12)] transition-all duration-500 border border-primary/10 hover:border-primary/25 flex flex-col overflow-hidden"
         >
             {/* Top accent glow line */}
             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
@@ -185,7 +185,7 @@ const ProductCard = ({
             {/* ── Image Section ── */}
             <div 
                 onClick={() => onViewImage(product)}
-                className="relative w-full aspect-square bg-gradient-to-br from-gray-50 via-white to-gray-100/50 overflow-hidden cursor-pointer"
+                className="relative w-full aspect-square bg-white/40 border-b border-primary/5 overflow-hidden cursor-pointer"
             >
                 {/* Decorative ambient glow behind product */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -516,7 +516,7 @@ const CartPanel = ({
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
-                        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                        transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
                         className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] z-[201] flex flex-col"
                     >
                         {/* Header */}
@@ -572,11 +572,26 @@ const CartPanel = ({
                                     items.map((item) => (
                                         <motion.div
                                             key={item.product.id}
-                                            layout
-                                            initial={{ opacity: 0, x: 30, scale: 0.95 }}
-                                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                                            exit={{ opacity: 0, x: -100, scale: 0.9, transition: { duration: 0.25 } }}
-                                            transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ 
+                                                opacity: 0, 
+                                                x: -30,
+                                                scale: 0.95,
+                                                height: 0, 
+                                                marginTop: 0,
+                                                marginBottom: 0,
+                                                paddingTop: 0,
+                                                paddingBottom: 0,
+                                                borderWidth: 0,
+                                                overflow: 'hidden',
+                                                transition: { 
+                                                    opacity: { duration: 0.15 },
+                                                    height: { duration: 0.2, delay: 0.05 },
+                                                    default: { duration: 0.2 } 
+                                                } 
+                                            }}
+                                            transition={{ duration: 0.25, ease: 'easeOut' }}
                                             className="bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] border border-primary/10 rounded-2xl p-4 flex gap-4 group/item hover:border-primary/20 transition-all duration-300 shadow-sm shadow-primary/[0.01]"
                                         >
                                             {/* Image */}
