@@ -520,14 +520,14 @@ const CartPanel = ({
                         className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] z-[201] flex flex-col"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                        <div className="flex items-center justify-between p-6 bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] border-b border-primary/10">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
                                     <ShoppingCart size={20} />
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-black text-gray-900 tracking-tight">Tu Carrito</h3>
-                                    <span className="text-xs text-gray-400 font-bold">
+                                    <span className="text-xs text-gray-500 font-bold">
                                         {totalItems} {totalItems === 1 ? 'artículo' : 'artículos'}
                                     </span>
                                 </div>
@@ -544,7 +544,7 @@ const CartPanel = ({
                                 <motion.button
                                     onClick={onClose}
                                     whileTap={{ scale: 0.9 }}
-                                    className="w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition-colors"
+                                    className="w-10 h-10 rounded-xl bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-primary transition-colors"
                                 >
                                     <X size={18} />
                                 </motion.button>
@@ -553,76 +553,85 @@ const CartPanel = ({
 
                         {/* Items */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
-                            {items.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center h-full text-center gap-4 py-20">
-                                    <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-                                        <ShoppingCart size={32} className="text-gray-300" />
-                                    </div>
-                                    <p className="text-gray-400 font-bold text-lg">Tu carrito está vacío</p>
-                                    <p className="text-gray-300 text-sm max-w-[200px]">Agregá accesorios del catálogo para empezar.</p>
-                                </div>
-                            ) : (
-                                items.map((item) => (
+                            <AnimatePresence mode="popLayout">
+                                {items.length === 0 ? (
                                     <motion.div
-                                        key={item.product.id}
-                                        layout
-                                        initial={{ opacity: 0, x: 30 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -30 }}
-                                        className="bg-gray-50 rounded-2xl p-4 flex gap-4 group/item"
+                                        key="empty"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        className="flex flex-col items-center justify-center h-full text-center gap-4 py-20"
                                     >
-                                        {/* Image */}
-                                        <div className="relative w-12 h-12 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
-                                            <Image
-                                                src={item.product.image}
-                                                alt={item.product.name}
-                                                fill
-                                                className="object-contain p-1"
-                                            />
+                                        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
+                                            <ShoppingCart size={32} className="text-gray-300" />
                                         </div>
-
-                                        {/* Info */}
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold text-gray-900 text-sm truncate">{item.product.name}</h4>
-                                            <span className="text-xs text-gray-400 font-semibold">
-                                                {formatPrice(item.product.price)} c/u
-                                            </span>
-
-                                            {/* Quantity controls */}
-                                            <div className="flex items-center gap-2 mt-2">
-                                                <button
-                                                    onClick={() => onUpdateQuantity(item.product.id, -1)}
-                                                    className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
-                                                >
-                                                    <Minus size={12} strokeWidth={3} />
-                                                </button>
-                                                <span className="w-8 text-center text-sm font-black text-gray-900">
-                                                    {item.quantity}
-                                                </span>
-                                                <button
-                                                    onClick={() => onUpdateQuantity(item.product.id, 1)}
-                                                    className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
-                                                >
-                                                    <Plus size={12} strokeWidth={3} />
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        {/* Subtotal & Remove */}
-                                        <div className="flex flex-col items-end justify-between shrink-0">
-                                            <button
-                                                onClick={() => onRemove(item.product.id)}
-                                                className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-300 hover:bg-red-50 hover:text-red-500 transition-all opacity-0 group-hover/item:opacity-100"
-                                            >
-                                                <Trash2 size={14} />
-                                            </button>
-                                            <span className="text-sm font-black text-gray-900">
-                                                {formatPrice(item.product.price * item.quantity)}
-                                            </span>
-                                        </div>
+                                        <p className="text-gray-400 font-bold text-lg">Tu carrito está vacío</p>
+                                        <p className="text-gray-300 text-sm max-w-[200px]">Agregá accesorios del catálogo para empezar.</p>
                                     </motion.div>
-                                ))
-                            )}
+                                ) : (
+                                    items.map((item) => (
+                                        <motion.div
+                                            key={item.product.id}
+                                            layout
+                                            initial={{ opacity: 0, x: 30, scale: 0.95 }}
+                                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                                            exit={{ opacity: 0, x: -100, scale: 0.9, transition: { duration: 0.25 } }}
+                                            transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+                                            className="bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] border border-primary/10 rounded-2xl p-4 flex gap-4 group/item hover:border-primary/20 transition-all duration-300 shadow-sm shadow-primary/[0.01]"
+                                        >
+                                            {/* Image */}
+                                            <div className="relative w-12 h-12 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+                                                <Image
+                                                    src={item.product.image}
+                                                    alt={item.product.name}
+                                                    fill
+                                                    className="object-contain p-1"
+                                                />
+                                            </div>
+
+                                            {/* Info */}
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="font-bold text-gray-900 text-sm truncate">{item.product.name}</h4>
+                                                <span className="text-xs text-gray-400 font-semibold">
+                                                    {formatPrice(item.product.price)} c/u
+                                                </span>
+
+                                                {/* Quantity controls */}
+                                                <div className="flex items-center gap-2 mt-2">
+                                                    <button
+                                                        onClick={() => onUpdateQuantity(item.product.id, -1)}
+                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
+                                                    >
+                                                        <Minus size={12} strokeWidth={3} />
+                                                    </button>
+                                                    <span className="w-8 text-center text-sm font-black text-gray-900">
+                                                        {item.quantity}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => onUpdateQuantity(item.product.id, 1)}
+                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
+                                                    >
+                                                        <Plus size={12} strokeWidth={3} />
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {/* Subtotal & Remove */}
+                                            <div className="flex flex-col items-end justify-between shrink-0">
+                                                <button
+                                                    onClick={() => onRemove(item.product.id)}
+                                                    className="w-8 h-8 rounded-full flex items-center justify-center text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-all shadow-sm"
+                                                >
+                                                    <Trash2 size={14} />
+                                                </button>
+                                                <span className="text-sm font-black text-gray-900">
+                                                    {formatPrice(item.product.price * item.quantity)}
+                                                </span>
+                                            </div>
+                                        </motion.div>
+                                    ))
+                                )}
+                            </AnimatePresence>
                         </div>
 
                         {/* Footer with total and checkout */}
