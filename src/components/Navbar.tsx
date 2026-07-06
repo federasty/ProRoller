@@ -4,10 +4,42 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCart } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
+
+    // Sincronizar conteo del carrito
+    useEffect(() => {
+        // Cargar conteo inicial en el cliente
+        const savedCart = localStorage.getItem('proroller-cart');
+        if (savedCart) {
+            try {
+                const parsed = JSON.parse(savedCart);
+                const count = parsed.reduce((sum: number, item: any) => sum + item.quantity, 0);
+                setCartCount(count);
+            } catch (e) {
+                console.error('Failed to parse cart from localStorage in Navbar:', e);
+            }
+        }
+
+        const handleCartUpdate = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            setCartCount(customEvent.detail.totalItems);
+        };
+
+        window.addEventListener('cartUpdate', handleCartUpdate);
+        return () => window.removeEventListener('cartUpdate', handleCartUpdate);
+    }, []);
+
+    // Cerrar menú responsive si se abre el carrito
+    useEffect(() => {
+        const handleOpenCart = () => setIsOpen(false);
+        window.addEventListener('openCart', handleOpenCart);
+        return () => window.removeEventListener('openCart', handleOpenCart);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,6 +58,7 @@ const Navbar = () => {
         { name: 'Servicios', href: '#servicios' },
         { name: 'Nosotros', href: '#nuestrosTrabajos' },
         { name: 'En Acción', href: '#videos-muestra' },
+        { name: 'Accesorios', href: '#accesorios' },
         { name: 'Contacto', href: '#contacto' },
     ];
 
@@ -151,6 +184,30 @@ const Navbar = () => {
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     ))}
+
+                    {/* Desktop Cart Button */}
+                    <button
+                        onClick={() => window.dispatchEvent(new CustomEvent('openCart'))}
+                        className={`relative p-2.5 rounded-full transition-all duration-300 ${
+                            scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-800 hover:bg-black/5'
+                        } flex items-center justify-center`}
+                        aria-label="Carrito de compras"
+                    >
+                        <ShoppingCart size={22} />
+                        <AnimatePresence>
+                            {cartCount > 0 && (
+                                <motion.span
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{ scale: 0 }}
+                                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center shadow-md border border-white"
+                                >
+                                    {cartCount}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </button>
+
                     <a
                         href="https://wa.me/59895113560?text=Hola%20ProRoller!%20Me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20gratis%20para%20unas%20cortinas."
                         target="_blank"
@@ -161,36 +218,62 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                {/* Mobile Hamburger */}
-                <button
-                    className="md:hidden relative z-[120] w-12 h-12 flex items-center justify-center focus:outline-none bg-white/10 rounded-full"
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Menu"
-                >
-                    <div className="flex flex-col gap-1.5 w-6">
-                        <motion.span
-                            animate={{
-                                rotate: isOpen ? 45 : 0,
-                                y: isOpen ? 8 : 0,
-                            }}
-                            className={`h-0.5 w-full rounded-full origin-center transition-colors duration-300 bg-gray-800`}
-                        />
-                        <motion.span
-                            animate={{
-                                opacity: isOpen ? 0 : 1,
-                                x: isOpen ? 10 : 0,
-                            }}
-                            className={`h-0.5 w-full rounded-full transition-colors duration-300 bg-gray-800`}
-                        />
-                        <motion.span
-                            animate={{
-                                rotate: isOpen ? -45 : 0,
-                                y: isOpen ? -8 : 0,
-                            }}
-                            className={`h-0.5 w-full rounded-full origin-center transition-colors duration-300 bg-gray-800`}
-                        />
-                    </div>
-                </button>
+                {/* Mobile Controls */}
+                <div className="flex md:hidden items-center gap-3 relative z-[120]">
+                    {/* Mobile Cart Button */}
+                    <button
+                        onClick={() => window.dispatchEvent(new CustomEvent('openCart'))}
+                        className={`relative w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${
+                            scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-800 hover:bg-white/10'
+                        }`}
+                        aria-label="Carrito de compras"
+                    >
+                        <ShoppingCart size={22} />
+                        <AnimatePresence>
+                            {cartCount > 0 && (
+                                <motion.span
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{ scale: 0 }}
+                                    className="absolute top-1.5 right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-black flex items-center justify-center shadow-md border border-white"
+                                >
+                                    {cartCount}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </button>
+
+                    {/* Mobile Hamburger */}
+                    <button
+                        className="w-12 h-12 flex items-center justify-center focus:outline-none bg-white/10 rounded-full"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Menu"
+                    >
+                        <div className="flex flex-col gap-1.5 w-6">
+                            <motion.span
+                                animate={{
+                                    rotate: isOpen ? 45 : 0,
+                                    y: isOpen ? 8 : 0,
+                                }}
+                                className={`h-0.5 w-full rounded-full origin-center transition-colors duration-300 bg-gray-800`}
+                            />
+                            <motion.span
+                                animate={{
+                                    opacity: isOpen ? 0 : 1,
+                                    x: isOpen ? 10 : 0,
+                                }}
+                                className={`h-0.5 w-full rounded-full transition-colors duration-300 bg-gray-800`}
+                            />
+                            <motion.span
+                                animate={{
+                                    rotate: isOpen ? -45 : 0,
+                                    y: isOpen ? -8 : 0,
+                                }}
+                                className={`h-0.5 w-full rounded-full origin-center transition-colors duration-300 bg-gray-800`}
+                            />
+                        </div>
+                    </button>
+                </div>
             </div>
 
             {/* Premium Mobile Menu Overlay con Efecto Cortina y Logo Partido */}
