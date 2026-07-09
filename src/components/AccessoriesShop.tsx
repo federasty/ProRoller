@@ -11,6 +11,12 @@ import {
 
 // ── Product Data ──────────────────────────────────────────────────────────────
 
+interface SizeOption {
+    name: string;
+    range: string;
+    price: number;
+}
+
 interface Product {
     id: number;
     name: string;
@@ -19,116 +25,77 @@ interface Product {
     icon: React.ReactNode;
     image: string;
     category: string;
+    bgColor?: string;
+    sizes?: SizeOption[];
 }
 
 const products: Product[] = [
     {
         id: 1,
-        name: 'Cadena de Repuesto',
-        description: 'Cadena plástica resistente, precio por metro lineal.',
-        price: 120,
-        icon: <LinkIcon size={28} />,
-        image: '/products/cadena-repuesto.png',
-        category: 'Repuestos',
+        name: 'Control para Motor Tubular',
+        description: 'Hasta 15 canales programables.',
+        price: 1760,
+        icon: <Radio size={28} />,
+        image: '/products/control para motor tubular.png',
+        category: 'Automatización',
+        bgColor: '#ebebeb',
     },
     {
         id: 2,
-        name: 'Soporte de Pared',
-        description: 'Soporte metálico universal para tubo de enrolle.',
-        price: 180,
-        icon: <Settings size={28} />,
-        image: '/products/soporte-pared.png',
-        category: 'Soportes',
+        name: 'Motor Estándar (para switch)',
+        description: 'Para cortinas roller.',
+        price: 3520,
+        icon: <Zap size={28} />,
+        image: '/products/motor estandar para switch.png',
+        category: 'Automatización',
+        bgColor: '#dfdfdf',
     },
     {
         id: 3,
-        name: 'Freno de Cadena',
-        description: 'Freno de seguridad para cadena de cortina roller.',
-        price: 150,
-        icon: <CircleDot size={28} />,
-        image: '/products/freno-cadena.png',
-        category: 'Seguridad',
+        name: 'Motor Radio Mando (para control)',
+        description: 'Para cortinas roller.',
+        price: 5780,
+        icon: <Settings size={28} />,
+        image: '/products/motor radio mando .png',
+        category: 'Automatización',
+        bgColor: '#dfdfdf',
     },
     {
         id: 4,
-        name: 'Contrapeso Inferior',
-        description: 'Barra de contrapeso de aluminio para tensión uniforme.',
-        price: 200,
+        name: 'Riel Extensible',
+        description: '',
+        price: 570,
         icon: <Ruler size={28} />,
-        image: '/products/contrapeso-inferior.png',
-        category: 'Repuestos',
+        image: '/products/riel extensible .jpeg',
+        category: 'Rieles',
+        bgColor: '#e2e2e2',
+        sizes: [
+            { name: 'XS', range: '070-120 cms', price: 570 },
+            { name: 'S', range: '120-210 cms', price: 660 },
+            { name: 'M', range: '160-290 cms', price: 850 },
+            { name: 'L', range: '210-390 cms', price: 945 },
+            { name: 'XL', range: '265-500 cms', price: 1230 },
+        ],
     },
     {
         id: 5,
-        name: 'Tubo de Enrolle 38mm',
-        description: 'Tubo de aluminio de 38mm, precio por metro lineal.',
-        price: 350,
-        icon: <Package size={28} />,
-        image: '/products/tubo-enrolle.png',
-        category: 'Estructura',
+        name: 'Riel Fino Completo',
+        description: 'Entero hasta 580 cms. Precio por metro lineal.',
+        price: 585,
+        icon: <Layers size={28} />,
+        image: '/products/riel fino completo.png',
+        category: 'Rieles',
+        bgColor: '#e0e0e0',
     },
     {
         id: 6,
-        name: 'Motor Tubular WiFi',
-        description: 'Motor inteligente con control por app y voz.',
-        price: 4500,
-        icon: <Wifi size={28} />,
-        image: '/products/motor-wifi.png',
-        category: 'Automatización',
-    },
-    {
-        id: 7,
-        name: 'Control Remoto',
-        description: 'Control remoto multicanal para motores tubulares.',
-        price: 1200,
-        icon: <Radio size={28} />,
-        image: '/products/control-remoto.png',
-        category: 'Automatización',
-    },
-    {
-        id: 8,
-        name: 'Tapas Laterales (Par)',
-        description: 'Tapas decorativas de cierre lateral, set de 2 unidades.',
-        price: 160,
-        icon: <CircleDot size={28} />,
-        image: '/products/tapas-laterales.png',
-        category: 'Terminaciones',
-    },
-    {
-        id: 9,
-        name: 'Kit de Instalación',
-        description: 'Kit completo con tornillos, tarugos y accesorios.',
-        price: 450,
-        icon: <Wrench size={28} />,
-        image: '/products/kit-instalacion.png',
-        category: 'Kits',
-    },
-    {
-        id: 10,
-        name: 'Tela Screen 5%',
-        description: 'Tela screen con 5% de apertura, precio por metro.',
-        price: 890,
-        icon: <Sun size={28} />,
-        image: '/products/tela-screen.png',
-        category: 'Telas',
-    },
-    {
-        id: 11,
-        name: 'Tela Blackout',
-        description: 'Tela blackout total, oscurecimiento al 100%.',
-        price: 750,
-        icon: <EyeOff size={28} />,
-        image: '/products/tela-blackout.png',
-        category: 'Telas',
-    },
-    {
-        id: 12,
-        name: 'Cenefa Decorativa',
-        description: 'Cenefa de aluminio para acabado profesional, por metro.',
-        price: 580,
-        icon: <Layers size={28} />,
-        image: '/products/cenefa-decorativa.png',
-        category: 'Terminaciones',
+        name: 'Riel Grueso Completo',
+        description: 'Riel con rodamientos (ideal cortinas pesadas). Entero hasta 580 cms. Precio por metro lineal.',
+        price: 1365,
+        icon: <Package size={28} />,
+        image: '/products/riel grueso completo.png',
+        category: 'Rieles',
+        bgColor: '#dfdfdf',
     },
 ];
 
@@ -137,6 +104,7 @@ const products: Product[] = [
 interface CartItem {
     product: Product;
     quantity: number;
+    selectedSize?: SizeOption;
 }
 
 // ── Format currency ───────────────────────────────────────────────────────────
@@ -151,17 +119,22 @@ const ProductCard = ({
     product,
     onAdd,
     onUpdateQuantity,
-    cartQuantity,
+    getCartQuantity,
     onViewImage,
 }: {
     product: Product;
-    onAdd: (product: Product) => void;
-    onUpdateQuantity: (productId: number, delta: number) => void;
-    cartQuantity: number;
+    onAdd: (product: Product, size?: SizeOption) => void;
+    onUpdateQuantity: (productId: number, delta: number, sizeName?: string) => void;
+    getCartQuantity: (productId: number, sizeName?: string) => number;
     onViewImage: (product: Product) => void;
 }) => {
+    const [selectedSize, setSelectedSize] = useState<SizeOption | undefined>(
+        product.sizes ? product.sizes[0] : undefined
+    );
+    const cartQuantity = getCartQuantity(product.id, selectedSize?.name);
+
     const handleAdd = () => {
-        onAdd(product);
+        onAdd(product, selectedSize);
     };
 
     return (
@@ -174,7 +147,7 @@ const ProductCard = ({
                 y: -8,
                 transition: { duration: 0.3, ease: 'easeOut' },
             }}
-            className="group relative bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,123,94,0.12)] transition-all duration-500 border border-primary/10 hover:border-primary/25 flex flex-col overflow-hidden"
+            className="group relative bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] rounded-[20px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(0,123,94,0.12)] transition-all duration-500 border border-primary/10 hover:border-primary/25 flex flex-col overflow-hidden h-full"
         >
             {/* Top accent glow line */}
             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
@@ -185,21 +158,22 @@ const ProductCard = ({
             {/* ── Image Section ── */}
             <div 
                 onClick={() => onViewImage(product)}
-                className="relative w-full aspect-square bg-white/40 border-b border-primary/5 overflow-hidden cursor-pointer"
+                className="relative w-full aspect-[4/3] border-b border-primary/5 overflow-hidden cursor-pointer"
+                style={{ backgroundColor: product.bgColor || '#f2f2f5' }}
             >
                 {/* Decorative ambient glow behind product */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-3/4 h-3/4 bg-primary/[0.04] rounded-full blur-3xl group-hover:bg-primary/[0.08] group-hover:scale-110 transition-all duration-700"></div>
+                    <div className="w-3/4 h-3/4 bg-primary/[0.02] rounded-full blur-3xl group-hover:bg-primary/[0.05] group-hover:scale-105 transition-all duration-700"></div>
                 </div>
 
                 {/* Product image */}
-                <div className="relative w-full h-full p-6 md:p-8 flex items-center justify-center">
+                <div className="relative w-full h-full p-3 md:p-4 flex items-center justify-center">
                     <Image
                         src={product.image}
                         alt={product.name}
                         width={280}
-                        height={280}
-                        className="object-contain w-full h-full drop-shadow-lg group-hover:scale-110 transition-transform duration-700 ease-out"
+                        height={210}
+                        className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                 </div>
 
@@ -228,19 +202,46 @@ const ProductCard = ({
             {/* ── Content Section ── */}
             <div className="flex flex-col flex-grow p-4 md:p-5">
                 {/* Text content */}
-                <h3 className="text-sm md:text-base font-black text-gray-900 mb-1 group-hover:text-primary transition-colors duration-300 tracking-tight leading-snug line-clamp-1">
+                <h3 className="text-sm md:text-base font-black text-gray-900 mb-1 group-hover:text-primary transition-colors duration-300 tracking-tight leading-snug">
                     {product.name}
                 </h3>
-                <p className="text-gray-400 text-[11px] md:text-xs leading-relaxed mb-4 font-medium line-clamp-2 flex-grow">
-                    {product.description}
-                </p>
+                {product.description && (
+                    <p className="text-gray-400 text-[11px] md:text-xs leading-relaxed mb-4 font-medium flex-grow">
+                        {product.description}
+                    </p>
+                )}
+
+                {/* Size Selector */}
+                {product.sizes && (
+                    <div className="mb-4">
+                        <span className="text-[9px] text-gray-400 uppercase tracking-[0.15em] font-extrabold block mb-1.5">Elegir Talle</span>
+                        <div className="flex flex-wrap gap-1.5">
+                            {product.sizes.map((size) => (
+                                <button
+                                    key={size.name}
+                                    onClick={() => setSelectedSize(size)}
+                                    className={`px-2.5 py-1 text-[10px] font-black rounded-lg transition-all border cursor-pointer ${
+                                        selectedSize?.name === size.name
+                                            ? 'bg-primary text-white border-primary shadow-sm shadow-primary/10'
+                                            : 'bg-primary/[0.02] text-gray-600 border-primary/10 hover:border-primary/25 hover:text-primary'
+                                    }`}
+                                >
+                                    {size.name}
+                                </button>
+                            ))}
+                        </div>
+                        <span className="text-[10px] text-gray-400 font-bold block mt-1.5">
+                            Medidas: {selectedSize?.range}
+                        </span>
+                    </div>
+                )}
 
                 {/* Price & Action */}
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100/80">
                     <div>
                         <span className="text-[8px] md:text-[9px] text-gray-400 uppercase tracking-[0.15em] font-extrabold block mb-0.5">Precio</span>
                         <span className="text-lg md:text-xl font-black text-gray-900 tracking-tight">
-                            {formatPrice(product.price)}
+                            {formatPrice(selectedSize ? selectedSize.price : product.price)}
                         </span>
                     </div>
 
@@ -254,7 +255,7 @@ const ProductCard = ({
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     onClick={handleAdd}
                                     whileTap={{ scale: 0.9 }}
-                                    className="h-9 md:h-10 px-4 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30"
+                                    className="h-9 md:h-10 px-4 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30 cursor-pointer"
                                 >
                                     <Plus size={16} strokeWidth={3} />
                                     <span className="hidden sm:inline">Agregar</span>
@@ -268,8 +269,8 @@ const ProductCard = ({
                                     className="flex items-center bg-primary text-white rounded-xl p-0.5 shadow-md shadow-primary/20 gap-1 h-9 md:h-10"
                                 >
                                     <button
-                                        onClick={() => onUpdateQuantity(product.id, -1)}
-                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200"
+                                        onClick={() => onUpdateQuantity(product.id, -1, selectedSize?.name)}
+                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
                                     >
                                         <Minus size={12} strokeWidth={3} />
                                     </button>
@@ -277,8 +278,8 @@ const ProductCard = ({
                                         {cartQuantity}
                                     </span>
                                     <button
-                                        onClick={() => onUpdateQuantity(product.id, 1)}
-                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200"
+                                        onClick={() => onUpdateQuantity(product.id, 1, selectedSize?.name)}
+                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
                                     >
                                         <Plus size={12} strokeWidth={3} />
                                     </button>
@@ -298,16 +299,20 @@ const ProductDetailModal = ({
     product,
     onClose,
     onAdd,
-    cartQuantity,
+    getCartQuantity,
     onUpdateQuantity,
 }: {
     product: Product;
     onClose: () => void;
-    onAdd: (product: Product) => void;
-    cartQuantity: number;
-    onUpdateQuantity: (productId: number, delta: number) => void;
+    onAdd: (product: Product, size?: SizeOption) => void;
+    getCartQuantity: (productId: number, sizeName?: string) => number;
+    onUpdateQuantity: (productId: number, delta: number, sizeName?: string) => void;
 }) => {
     const modalRef = useRef<HTMLDivElement>(null);
+    const [selectedSize, setSelectedSize] = useState<SizeOption | undefined>(
+        product.sizes ? product.sizes[0] : undefined
+    );
+    const cartQuantity = getCartQuantity(product.id, selectedSize?.name);
 
     // Close on click outside
     useEffect(() => {
@@ -359,16 +364,19 @@ const ProductDetailModal = ({
                     </motion.button>
 
                     {/* Left Side: Large Product Image */}
-                    <div className="w-full md:w-1/2 aspect-square md:aspect-auto md:h-full bg-gradient-to-br from-gray-50 via-white to-gray-100/50 flex items-center justify-center p-8 md:p-12 relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0">
+                    <div 
+                        className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-full flex items-center justify-center p-4 md:p-6 relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0"
+                        style={{ backgroundColor: product.bgColor || '#f2f2f5' }}
+                    >
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div className="w-3/4 h-3/4 bg-primary/[0.03] rounded-full blur-3xl"></div>
+                            <div className="w-3/4 h-3/4 bg-primary/[0.02] rounded-full blur-3xl"></div>
                         </div>
-                        <div className="relative w-full h-full min-h-[220px] md:min-h-[300px]">
+                        <div className="relative w-full h-full min-h-[200px] md:min-h-[300px]">
                             <Image
                                 src={product.image}
                                 alt={product.name}
                                 fill
-                                className="object-contain drop-shadow-xl"
+                                className="object-contain"
                                 priority
                             />
                         </div>
@@ -391,9 +399,33 @@ const ProductDetailModal = ({
                             <div className="w-12 h-1 bg-primary/20 rounded-full mb-4"></div>
 
                             {/* Description */}
-                            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
-                                {product.description}
-                            </p>
+                            {product.description && (
+                                <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
+                                    {product.description}
+                                </p>
+                            )}
+
+                            {/* Size Selector inside Modal */}
+                            {product.sizes && (
+                                <div className="mb-6">
+                                    <span className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-extrabold block mb-2">Medida / Talle</span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {product.sizes.map((size) => (
+                                            <button
+                                                key={size.name}
+                                                onClick={() => setSelectedSize(size)}
+                                                className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all border cursor-pointer ${
+                                                    selectedSize?.name === size.name
+                                                        ? 'bg-primary text-white border-primary shadow-sm shadow-primary/10'
+                                                        : 'bg-primary/[0.02] text-gray-600 border-primary/10 hover:border-primary/25 hover:text-primary'
+                                                }`}
+                                            >
+                                                Talle {size.name} ({size.range})
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Price and CTA */}
@@ -402,7 +434,7 @@ const ProductDetailModal = ({
                                 <div>
                                     <span className="text-[10px] text-gray-400 uppercase tracking-widest font-extrabold block mb-0.5">Precio Unitario</span>
                                     <span className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">
-                                        {formatPrice(product.price)}
+                                        {formatPrice(selectedSize ? selectedSize.price : product.price)}
                                     </span>
                                 </div>
 
@@ -414,9 +446,9 @@ const ProductDetailModal = ({
                                                 initial={{ opacity: 0, scale: 0.9 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.9 }}
-                                                onClick={() => onAdd(product)}
+                                                onClick={() => onAdd(product, selectedSize)}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="h-10 md:h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30"
+                                                className="h-10 md:h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30 cursor-pointer"
                                             >
                                                 <Plus size={18} strokeWidth={3} />
                                                 <span>Agregar al Pedido</span>
@@ -430,8 +462,8 @@ const ProductDetailModal = ({
                                                 className="flex items-center bg-primary text-white rounded-xl p-1 shadow-md shadow-primary/20 gap-2 h-10 md:h-12"
                                             >
                                                 <button
-                                                    onClick={() => onUpdateQuantity(product.id, -1)}
-                                                    className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200"
+                                                    onClick={() => onUpdateQuantity(product.id, -1, selectedSize?.name)}
+                                                    className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
                                                 >
                                                     <Minus size={14} strokeWidth={3} />
                                                 </button>
@@ -439,8 +471,8 @@ const ProductDetailModal = ({
                                                     {cartQuantity}
                                                 </span>
                                                 <button
-                                                    onClick={() => onUpdateQuantity(product.id, 1)}
-                                                    className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200"
+                                                    onClick={() => onUpdateQuantity(product.id, 1, selectedSize?.name)}
+                                                    className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
                                                 >
                                                     <Plus size={14} strokeWidth={3} />
                                                 </button>
@@ -470,11 +502,11 @@ const CartPanel = ({
     items: CartItem[];
     isOpen: boolean;
     onClose: () => void;
-    onUpdateQuantity: (productId: number, delta: number) => void;
-    onRemove: (productId: number) => void;
+    onUpdateQuantity: (productId: number, delta: number, sizeName?: string) => void;
+    onRemove: (productId: number, sizeName?: string) => void;
     onCheckout: () => void;
 }) => {
-    const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+    const total = items.reduce((sum, item) => sum + (item.selectedSize?.price || item.product.price) * item.quantity, 0);
     const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
     const panelRef = useRef<HTMLDivElement>(null);
 
@@ -544,7 +576,7 @@ const CartPanel = ({
                                 <motion.button
                                     onClick={onClose}
                                     whileTap={{ scale: 0.9 }}
-                                    className="w-10 h-10 rounded-xl bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-primary transition-colors"
+                                    className="w-10 h-10 rounded-xl bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-primary transition-colors cursor-pointer"
                                 >
                                     <X size={18} />
                                 </motion.button>
@@ -571,7 +603,7 @@ const CartPanel = ({
                                 ) : (
                                     items.map((item) => (
                                         <motion.div
-                                            key={item.product.id}
+                                            key={`${item.product.id}-${item.selectedSize?.name || 'default'}`}
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ 
@@ -595,7 +627,7 @@ const CartPanel = ({
                                             className="bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] border border-primary/10 rounded-2xl p-4 flex gap-4 group/item hover:border-primary/20 transition-all duration-300 shadow-sm shadow-primary/[0.01]"
                                         >
                                             {/* Image */}
-                                            <div className="relative w-12 h-12 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+                                            <div className="relative w-12 h-12 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden shadow-sm" style={{ backgroundColor: item.product.bgColor || '#f2f2f5' }}>
                                                 <Image
                                                     src={item.product.image}
                                                     alt={item.product.name}
@@ -607,15 +639,20 @@ const CartPanel = ({
                                             {/* Info */}
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="font-bold text-gray-900 text-sm truncate">{item.product.name}</h4>
+                                                {item.selectedSize && (
+                                                    <span className="text-[10px] text-primary font-bold block leading-none mb-1">
+                                                        Talle {item.selectedSize.name} ({item.selectedSize.range})
+                                                    </span>
+                                                )}
                                                 <span className="text-xs text-gray-400 font-semibold">
-                                                    {formatPrice(item.product.price)} c/u
+                                                    {formatPrice(item.selectedSize?.price || item.product.price)} c/u
                                                 </span>
 
                                                 {/* Quantity controls */}
                                                 <div className="flex items-center gap-2 mt-2">
                                                     <button
-                                                        onClick={() => onUpdateQuantity(item.product.id, -1)}
-                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
+                                                        onClick={() => onUpdateQuantity(item.product.id, -1, item.selectedSize?.name)}
+                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors cursor-pointer"
                                                     >
                                                         <Minus size={12} strokeWidth={3} />
                                                     </button>
@@ -623,8 +660,8 @@ const CartPanel = ({
                                                         {item.quantity}
                                                     </span>
                                                     <button
-                                                        onClick={() => onUpdateQuantity(item.product.id, 1)}
-                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors"
+                                                        onClick={() => onUpdateQuantity(item.product.id, 1, item.selectedSize?.name)}
+                                                        className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition-colors cursor-pointer"
                                                     >
                                                         <Plus size={12} strokeWidth={3} />
                                                     </button>
@@ -634,13 +671,13 @@ const CartPanel = ({
                                             {/* Subtotal & Remove */}
                                             <div className="flex flex-col items-end justify-between shrink-0">
                                                 <button
-                                                    onClick={() => onRemove(item.product.id)}
-                                                    className="w-8 h-8 rounded-full flex items-center justify-center text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-all shadow-sm"
+                                                    onClick={() => onRemove(item.product.id, item.selectedSize?.name)}
+                                                    className="w-8 h-8 rounded-full flex items-center justify-center text-red-500 bg-red-50 hover:bg-red-100 hover:text-red-600 transition-all shadow-sm cursor-pointer"
                                                 >
                                                     <Trash2 size={14} />
                                                 </button>
                                                 <span className="text-sm font-black text-gray-900">
-                                                    {formatPrice(item.product.price * item.quantity)}
+                                                    {formatPrice((item.selectedSize?.price || item.product.price) * item.quantity)}
                                                 </span>
                                             </div>
                                         </motion.div>
@@ -665,7 +702,7 @@ const CartPanel = ({
                                     onClick={onCheckout}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 px-6 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 transition-colors"
+                                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 px-6 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/30 transition-colors cursor-pointer"
                                 >
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -698,12 +735,13 @@ const AccessoriesShop = () => {
         const savedCart = localStorage.getItem('proroller-cart');
         if (savedCart) {
             try {
-                const parsed = JSON.parse(savedCart) as { id: number; quantity: number }[];
+                const parsed = JSON.parse(savedCart) as { id: number; quantity: number; sizeName?: string }[];
                 const reconstructedCart: CartItem[] = parsed
                     .map(savedItem => {
                         const product = products.find(p => p.id === savedItem.id);
                         if (product) {
-                            return { product, quantity: savedItem.quantity };
+                            const selectedSize = product.sizes?.find(s => s.name === savedItem.sizeName);
+                            return { product, quantity: savedItem.quantity, selectedSize };
                         }
                         return null;
                     })
@@ -721,7 +759,8 @@ const AccessoriesShop = () => {
         if (!isLoaded) return;
         const serializableCart = cart.map(item => ({
             id: item.product.id,
-            quantity: item.quantity
+            quantity: item.quantity,
+            sizeName: item.selectedSize?.name
         }));
         localStorage.setItem('proroller-cart', JSON.stringify(serializableCart));
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -741,27 +780,28 @@ const AccessoriesShop = () => {
         window.dispatchEvent(event);
     }, [isCartOpen]);
 
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    const addToCart = useCallback((product: Product) => {
+    const addToCart = useCallback((product: Product, size?: SizeOption) => {
         setCart((prev) => {
-            const existing = prev.find((item) => item.product.id === product.id);
+            const existing = prev.find((item) => 
+                item.product.id === product.id && 
+                (!product.sizes || item.selectedSize?.name === size?.name)
+            );
             if (existing) {
                 return prev.map((item) =>
-                    item.product.id === product.id
+                    item.product.id === product.id && (!product.sizes || item.selectedSize?.name === size?.name)
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
                 );
             }
-            return [...prev, { product, quantity: 1 }];
+            return [...prev, { product, quantity: 1, selectedSize: size }];
         });
     }, []);
 
-    const updateQuantity = useCallback((productId: number, delta: number) => {
+    const updateQuantity = useCallback((productId: number, delta: number, sizeName?: string) => {
         setCart((prev) =>
             prev
                 .map((item) =>
-                    item.product.id === productId
+                    item.product.id === productId && (!sizeName || item.selectedSize?.name === sizeName)
                         ? { ...item, quantity: Math.max(0, item.quantity + delta) }
                         : item
                 )
@@ -769,13 +809,17 @@ const AccessoriesShop = () => {
         );
     }, []);
 
-    const removeFromCart = useCallback((productId: number) => {
-        setCart((prev) => prev.filter((item) => item.product.id !== productId));
+    const removeFromCart = useCallback((productId: number, sizeName?: string) => {
+        setCart((prev) => prev.filter((item) => 
+            !(item.product.id === productId && (!sizeName || item.selectedSize?.name === sizeName))
+        ));
     }, []);
 
     const getCartQuantity = useCallback(
-        (productId: number) => {
-            const item = cart.find((i) => i.product.id === productId);
+        (productId: number, sizeName?: string) => {
+            const item = cart.find((i) => 
+                i.product.id === productId && (!sizeName || i.selectedSize?.name === sizeName)
+            );
             return item ? item.quantity : 0;
         },
         [cart]
@@ -784,12 +828,14 @@ const AccessoriesShop = () => {
     const handleCheckout = useCallback(() => {
         if (cart.length === 0) return;
 
-        const total = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+        const total = cart.reduce((sum, item) => sum + (item.selectedSize?.price || item.product.price) * item.quantity, 0);
 
         let message = '🛒 *Pedido ProRoller - Accesorios*\n\n';
         cart.forEach((item) => {
-            const subtotal = item.product.price * item.quantity;
-            message += `• ${item.product.name} x${item.quantity} — ${formatPrice(subtotal)}\n`;
+            const price = item.selectedSize?.price || item.product.price;
+            const subtotal = price * item.quantity;
+            const sizeDetails = item.selectedSize ? ` (Talle ${item.selectedSize.name}: ${item.selectedSize.range})` : '';
+            message += `• ${item.product.name}${sizeDetails} x${item.quantity} — ${formatPrice(subtotal)}\n`;
         });
         message += `\n*Total: ${formatPrice(total)}*\n\n`;
         message += '¡Hola! Quiero confirmar este pedido de accesorios.';
@@ -851,7 +897,7 @@ const AccessoriesShop = () => {
                             product={product}
                             onAdd={addToCart}
                             onUpdateQuantity={updateQuantity}
-                            cartQuantity={getCartQuantity(product.id)}
+                            getCartQuantity={getCartQuantity}
                             onViewImage={setSelectedProduct}
                         />
                     ))}
@@ -876,7 +922,7 @@ const AccessoriesShop = () => {
                         onClose={() => setSelectedProduct(null)}
                         onAdd={addToCart}
                         onUpdateQuantity={updateQuantity}
-                        cartQuantity={getCartQuantity(selectedProduct.id)}
+                        getCartQuantity={getCartQuantity}
                     />
                 )}
             </AnimatePresence>
