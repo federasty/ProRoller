@@ -388,10 +388,7 @@ const Navbar = () => {
                                 className="px-8 pt-6 flex flex-col items-center gap-3 text-center relative z-10 flex-shrink-0"
                             >
                                 <div className="h-px w-20 bg-gray-100 mb-1"></div>
-                                <div className="space-y-1">
-                                    <p className="font-black text-gray-900 tracking-[0.2em] text-xs uppercase">Pro Roller</p>
-                                    <p className="text-gray-400 text-sm font-medium">Seguinos en nuestras redes sociales</p>
-                                </div>
+                                <p className="text-gray-400 text-sm font-medium">Seguinos en nuestras redes sociales</p>
 
                                 <div className="flex gap-6 pt-1">
                                     <a
