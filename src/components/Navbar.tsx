@@ -326,7 +326,7 @@ const Navbar = () => {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute inset-0 h-full w-full flex flex-col pt-[180px] pb-8 pointer-events-auto z-10 overflow-y-auto"
+                            className="absolute inset-0 h-full w-full flex flex-col pt-[180px] pb-16 pointer-events-auto z-10 overflow-y-auto"
                         >
                             {/* Elegant background gradients */}
                             <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
