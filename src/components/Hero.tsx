@@ -209,7 +209,7 @@ const FloatingUruguayMap = () => {
 
 const Hero = () => {
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden !pb-0">
+        <section className="relative h-dvh flex items-center justify-center overflow-hidden !pb-0">
             {/* Background Image - Clean and Tenue */}
             <div className="absolute inset-0 z-0">
                 <Image
