@@ -9,6 +9,7 @@ const FloatingWhatsApp = () => {
     const [showTooltip, setShowTooltip] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isProductModalOpen, setIsProductModalOpen] = useState(false);
 
     useEffect(() => {
         // Mostrar después de un breve delay para no ser intrusivo al inicio
@@ -31,18 +32,25 @@ const FloatingWhatsApp = () => {
             console.log('FloatingWhatsApp cartToggle received:', customEvent.detail.isOpen);
             setIsCartOpen(customEvent.detail.isOpen);
         };
+        const handleProductModalToggle = (e: Event) => {
+            const customEvent = e as CustomEvent<{ isOpen: boolean }>;
+            console.log('FloatingWhatsApp productModalToggle received:', customEvent.detail.isOpen);
+            setIsProductModalOpen(customEvent.detail.isOpen);
+        };
         window.addEventListener('menuToggle', handleMenuToggle);
         window.addEventListener('cartToggle', handleCartToggle);
+        window.addEventListener('productModalToggle', handleProductModalToggle);
         return () => {
             window.removeEventListener('menuToggle', handleMenuToggle);
             window.removeEventListener('cartToggle', handleCartToggle);
+            window.removeEventListener('productModalToggle', handleProductModalToggle);
         };
     }, []);
 
     return (
         <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end gap-3">
             <AnimatePresence>
-                {showTooltip && !isMenuOpen && !isCartOpen && (
+                {showTooltip && !isMenuOpen && !isCartOpen && !isProductModalOpen && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8, x: 20 }}
                         animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -74,7 +82,7 @@ const FloatingWhatsApp = () => {
             </AnimatePresence>
 
             <AnimatePresence>
-                {isVisible && !isMenuOpen && !isCartOpen && (
+                {isVisible && !isMenuOpen && !isCartOpen && !isProductModalOpen && (
                     <motion.a
                         href="https://wa.me/59895113560?text=Hola%20ProRoller!%20Me%20gustar%C3%ADa%20hacer%20una%20consulta."
                         target="_blank"

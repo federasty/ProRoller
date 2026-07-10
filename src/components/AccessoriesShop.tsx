@@ -730,6 +730,11 @@ const AccessoriesShop = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+    useEffect(() => {
+        const event = new CustomEvent('productModalToggle', { detail: { isOpen: selectedProduct !== null } });
+        window.dispatchEvent(event);
+    }, [selectedProduct]);
+
     // Cargar carrito desde localStorage en el cliente
     useEffect(() => {
         const savedCart = localStorage.getItem('proroller-cart');

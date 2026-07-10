@@ -30,6 +30,12 @@ const infiniteWorks = [...works, ...works, ...works];
 
 const Gallery = () => {
     const [selectedImage, setSelectedImage] = useState<typeof works[0] | null>(null);
+
+    useEffect(() => {
+        const event = new CustomEvent('productModalToggle', { detail: { isOpen: selectedImage !== null } });
+        window.dispatchEvent(event);
+    }, [selectedImage]);
+
     const [isDragging, setIsDragging] = useState(false);
     const [width, setWidth] = useState(0);
 
