@@ -54,7 +54,8 @@ const FloatingWhatsApp = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8, x: 20 }}
                         animate={{ opacity: 1, scale: 1, x: 0 }}
-                        exit={{ opacity: 0, scale: 0.8, x: 20 }}
+                        exit={{ opacity: 0, scale: 0.8, x: 20, transition: { duration: 0.12 } }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
                         className="relative group bg-white p-4 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.15)] border border-gray-100 mb-2 max-w-[220px]"
                     >
                         <button
@@ -89,6 +90,8 @@ const FloatingWhatsApp = () => {
                         rel="noopener noreferrer"
                         initial={{ opacity: 0, scale: 0.5, y: 30 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.5, y: 30, transition: { duration: 0.12 } }}
+                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="relative flex items-center justify-center"
