@@ -139,10 +139,12 @@ const ProductCard = ({
 
     return (
         <motion.div
+            layout
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
             whileHover={{
                 y: -8,
                 transition: { duration: 0.3, ease: 'easeOut' },
@@ -732,6 +734,13 @@ const AccessoriesShop = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [activeCategory, setActiveCategory] = useState<string>('Todos');
+
+    const categories = ['Todos', 'Automatización', 'Rieles'];
+
+    const filteredProducts = activeCategory === 'Todos'
+        ? products
+        : products.filter(product => product.category === activeCategory);
 
     useEffect(() => {
         if (selectedProduct !== null) {
@@ -913,19 +922,50 @@ const AccessoriesShop = () => {
                     </motion.p>
                 </header>
 
-                {/* Product Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-                    {products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                            onAdd={addToCart}
-                            onUpdateQuantity={updateQuantity}
-                            getCartQuantity={getCartQuantity}
-                            onViewImage={setSelectedProduct}
-                        />
-                    ))}
+                {/* Category Filter */}
+                <div className="flex justify-center gap-3 mb-10 md:mb-14 relative z-10">
+                    {categories.map((category) => {
+                        const isActive = activeCategory === category;
+                        return (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className="relative px-6 py-2.5 rounded-full text-xs md:text-sm font-black tracking-wide transition-colors duration-300 cursor-pointer focus:outline-none select-none text-gray-500"
+                                style={{
+                                    color: isActive ? '#ffffff' : undefined
+                                }}
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="activeCategoryBg"
+                                        className="absolute inset-0 bg-primary rounded-full shadow-lg shadow-primary/20"
+                                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{category}</span>
+                            </button>
+                        );
+                    })}
                 </div>
+
+                {/* Product Grid */}
+                <motion.div 
+                    layout
+                    className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {filteredProducts.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                                onAdd={addToCart}
+                                onUpdateQuantity={updateQuantity}
+                                getCartQuantity={getCartQuantity}
+                                onViewImage={setSelectedProduct}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
             </div>
 
             {/* Cart Panel */}
