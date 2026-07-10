@@ -549,7 +549,7 @@ const CartPanel = ({
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
-                        className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] z-[201] flex flex-col"
+                        className="fixed top-0 right-0 h-dvh w-full max-w-md bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] z-[201] flex flex-col"
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between p-6 bg-gradient-to-br from-primary/[0.06] to-primary/[0.02] border-b border-primary/10">
