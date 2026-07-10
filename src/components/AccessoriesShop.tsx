@@ -239,15 +239,15 @@ const ProductCard = ({
                 )}
 
                 {/* Price & Action */}
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100/80">
-                    <div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-gray-100/80">
+                    <div className="flex items-center justify-between sm:flex-col sm:items-start sm:justify-start">
                         <span className="text-[8px] md:text-[9px] text-gray-400 uppercase tracking-[0.15em] font-extrabold block mb-0.5">Precio</span>
                         <span className="text-lg md:text-xl font-black text-gray-900 tracking-tight">
                             {formatPrice(selectedSize ? selectedSize.price : product.price)}
                         </span>
                     </div>
 
-                    <div className="relative h-9 md:h-10 flex items-center justify-end">
+                    <div className="relative h-9 md:h-10 flex items-center justify-end w-full sm:w-auto">
                         <AnimatePresence mode="wait">
                             {cartQuantity === 0 ? (
                                 <motion.button
@@ -257,10 +257,10 @@ const ProductCard = ({
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     onClick={handleAdd}
                                     whileTap={{ scale: 0.9 }}
-                                    className="h-9 md:h-10 px-4 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30 cursor-pointer"
+                                    className="h-9 md:h-10 w-full sm:w-auto px-4 rounded-xl bg-primary hover:bg-primary/90 text-white text-xs md:text-sm font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md shadow-primary/20 hover:shadow-primary/30 cursor-pointer"
                                 >
                                     <Plus size={16} strokeWidth={3} />
-                                    <span className="hidden sm:inline">Agregar</span>
+                                    <span>Agregar</span>
                                 </motion.button>
                             ) : (
                                 <motion.div
@@ -268,20 +268,20 @@ const ProductCard = ({
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.8 }}
-                                    className="flex items-center bg-primary text-white rounded-xl p-0.5 shadow-md shadow-primary/20 gap-1 h-9 md:h-10"
+                                    className="flex items-center justify-between sm:justify-start bg-primary text-white rounded-xl p-0.5 shadow-md shadow-primary/20 gap-1 h-9 md:h-10 w-full sm:w-auto"
                                 >
                                     <button
                                         onClick={() => onUpdateQuantity(product.id, -1, selectedSize?.name)}
-                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
+                                        className="w-8 h-7 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-white/15 hover:bg-white text-white hover:text-primary flex items-center justify-center transition-all duration-200 cursor-pointer flex-1 sm:flex-initial"
                                     >
                                         <Minus size={12} strokeWidth={3} />
                                     </button>
-                                    <span className="w-6 text-center text-xs md:text-sm font-black select-none">
+                                    <span className="w-10 sm:w-6 text-center text-xs md:text-sm font-black select-none">
                                         {cartQuantity}
                                     </span>
                                     <button
                                         onClick={() => onUpdateQuantity(product.id, 1, selectedSize?.name)}
-                                        className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200 cursor-pointer"
+                                        className="w-8 h-7 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-white hover:bg-white/90 text-primary flex items-center justify-center transition-all duration-200 cursor-pointer flex-1 sm:flex-initial"
                                     >
                                         <Plus size={12} strokeWidth={3} />
                                     </button>
