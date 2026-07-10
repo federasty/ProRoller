@@ -326,7 +326,7 @@ const Navbar = () => {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute inset-0 h-full w-full flex flex-col pt-[240px] pb-12 pointer-events-auto z-10"
+                            className="absolute inset-0 h-full w-full flex flex-col pt-[180px] pb-8 pointer-events-auto z-10 overflow-y-auto"
                         >
                             {/* Elegant background gradients */}
                             <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
@@ -335,20 +335,20 @@ const Navbar = () => {
                             </div>
 
                             <div className="flex-1 flex flex-col justify-start px-8 relative z-10">
-                                <div className="space-y-4">
+                                <div className="space-y-3">
                                     {navLinks.map((link, i) => (
                                         <motion.div
                                             key={link.name}
                                             custom={i}
                                             variants={linkVariants}
-                                            className="border-b border-gray-50 pb-4"
+                                            className="border-b border-gray-50 pb-3"
                                         >
                                             <a
                                                 href={link.href}
                                                 onClick={(e) => handleNavLinkClick(e, link.href)}
                                                 className="group flex items-center justify-between"
                                             >
-                                                <span className="text-4xl font-extrabold text-gray-900 group-active:text-primary transition-colors tracking-tight">
+                                                <span className="text-3xl font-extrabold text-gray-900 group-active:text-primary transition-colors tracking-tight">
                                                     {link.name}
                                                 </span>
                                                 <div className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center group-active:bg-primary group-active:border-primary transition-all">
@@ -364,13 +364,13 @@ const Navbar = () => {
                                 <motion.div
                                     custom={navLinks.length}
                                     variants={linkVariants}
-                                    className="mt-8"
+                                    className="mt-6"
                                 >
                                     <a
                                         href="https://wa.me/59895113560?text=Hola%20ProRoller!%20Me%20gustar%C3%ADa%20solicitar%20un%20presupuesto%20gratis%20para%20unas%20cortinas."
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="btn-primary w-full py-5 text-xl font-black shadow-2xl shadow-primary/20 flex items-center justify-center gap-3"
+                                        className="btn-primary w-full py-4 text-lg font-black shadow-2xl shadow-primary/20 flex items-center justify-center gap-3"
                                     >
                                         Pedir Presupuesto
                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,15 +385,15 @@ const Navbar = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.65 }}
-                                className="px-8 mt-auto flex flex-col items-center gap-4 text-center relative z-10"
+                                className="px-8 pt-6 flex flex-col items-center gap-3 text-center relative z-10 flex-shrink-0"
                             >
-                                <div className="h-px w-20 bg-gray-100 mb-2"></div>
+                                <div className="h-px w-20 bg-gray-100 mb-1"></div>
                                 <div className="space-y-1">
                                     <p className="font-black text-gray-900 tracking-[0.2em] text-xs uppercase">Pro Roller</p>
                                     <p className="text-gray-400 text-sm font-medium">Seguinos en nuestras redes sociales</p>
                                 </div>
 
-                                <div className="flex gap-6 pt-2">
+                                <div className="flex gap-6 pt-1">
                                     <a
                                         href="https://www.instagram.com/proroller.uy/"
                                         target="_blank"
