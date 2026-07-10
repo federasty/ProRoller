@@ -36,9 +36,9 @@ const products: Product[] = [
         description: 'Hasta 15 canales programables.',
         price: 1760,
         icon: <Radio size={28} />,
-        image: '/products/control para motor tubular.png',
+        image: '/products/control para motor tubular .jpeg',
         category: 'Automatización',
-        bgColor: '#ebebeb',
+        bgColor: '#ffffff',
     },
     {
         id: 2,
@@ -46,9 +46,9 @@ const products: Product[] = [
         description: 'Para cortinas roller.',
         price: 3520,
         icon: <Zap size={28} />,
-        image: '/products/motor estandar para switch.png',
+        image: '/products/motor estandar para switch.jpeg',
         category: 'Automatización',
-        bgColor: '#dfdfdf',
+        bgColor: '#ffffff',
     },
     {
         id: 3,
@@ -56,9 +56,9 @@ const products: Product[] = [
         description: 'Para cortinas roller.',
         price: 5780,
         icon: <Settings size={28} />,
-        image: '/products/motor radio mando .png',
+        image: '/products/motor radio mando.jpeg',
         category: 'Automatización',
-        bgColor: '#dfdfdf',
+        bgColor: '#ffffff',
     },
     {
         id: 4,
@@ -66,9 +66,9 @@ const products: Product[] = [
         description: '',
         price: 570,
         icon: <Ruler size={28} />,
-        image: '/products/riel extensible .jpeg',
+        image: '/products/riel extensible.jpeg',
         category: 'Rieles',
-        bgColor: '#e2e2e2',
+        bgColor: '#ffffff',
         sizes: [
             { name: 'XS', range: '070-120 cms', price: 570 },
             { name: 'S', range: '120-210 cms', price: 660 },
@@ -83,9 +83,9 @@ const products: Product[] = [
         description: 'Entero hasta 580 cms. Precio por metro lineal.',
         price: 585,
         icon: <Layers size={28} />,
-        image: '/products/riel fino completo.png',
+        image: '/products/riel fino completo.jpeg',
         category: 'Rieles',
-        bgColor: '#e0e0e0',
+        bgColor: '#ffffff',
     },
     {
         id: 6,
@@ -93,9 +93,9 @@ const products: Product[] = [
         description: 'Riel con rodamientos (ideal cortinas pesadas). Entero hasta 580 cms. Precio por metro lineal.',
         price: 1365,
         icon: <Package size={28} />,
-        image: '/products/riel grueso completo.png',
+        image: '/products/riel grueso completo.jpeg',
         category: 'Rieles',
-        bgColor: '#dfdfdf',
+        bgColor: '#ffffff',
     },
 ];
 
@@ -173,13 +173,13 @@ const ProductCard = ({
                         alt={product.name}
                         width={280}
                         height={210}
-                        className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out mix-blend-multiply"
                     />
                 </div>
 
                 {/* Category badge (floating on image) */}
                 <div className="absolute top-3 left-3 z-10">
-                    <span className="inline-flex items-center text-[9px] md:text-[10px] font-bold text-primary bg-white/90 backdrop-blur-md px-3 py-1 rounded-full uppercase tracking-wider border border-primary/10 shadow-sm">
+                    <span className="inline-flex items-center text-[9px] md:text-[10px] font-bold text-primary bg-primary/10 backdrop-blur-md px-3 py-1 rounded-full uppercase tracking-wider border border-primary/20 shadow-sm">
                         {product.category}
                     </span>
                 </div>
@@ -376,7 +376,7 @@ const ProductDetailModal = ({
                                 src={product.image}
                                 alt={product.name}
                                 fill
-                                className="object-contain"
+                                className="object-contain mix-blend-multiply"
                                 priority
                             />
                         </div>
@@ -386,7 +386,7 @@ const ProductDetailModal = ({
                     <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
                         <div>
                             {/* Category badge */}
-                            <span className="inline-flex items-center text-[9px] md:text-[10px] font-bold text-primary bg-primary/[0.04] px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-primary/10 mb-4">
+                            <span className="inline-flex items-center text-[9px] md:text-[10px] font-bold text-primary bg-primary/10 backdrop-blur-md px-2.5 py-1 rounded-full uppercase tracking-wider border border-primary/20 mb-4">
                                 {product.category}
                             </span>
 
@@ -632,7 +632,7 @@ const CartPanel = ({
                                                     src={item.product.image}
                                                     alt={item.product.name}
                                                     fill
-                                                    className="object-contain p-1"
+                                                    className="object-contain p-1 mix-blend-multiply"
                                                 />
                                             </div>
 
@@ -741,7 +741,7 @@ const AccessoriesShop = () => {
                         const product = products.find(p => p.id === savedItem.id);
                         if (product) {
                             const selectedSize = product.sizes?.find(s => s.name === savedItem.sizeName);
-                            return { product, quantity: savedItem.quantity, selectedSize };
+                            return { product, quantity: savedItem.quantity, selectedSize } as CartItem;
                         }
                         return null;
                     })
