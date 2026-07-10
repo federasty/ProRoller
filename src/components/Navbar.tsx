@@ -92,15 +92,15 @@ const Navbar = () => {
         closed: {
             x: "-100%",
             transition: {
-                duration: 0.5,
-                ease: [0.4, 0, 0.2, 1] as any
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1] as any
             }
         },
         open: {
             x: 0,
             transition: {
-                duration: 0.5,
-                ease: [0.4, 0, 0.2, 1] as any
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1] as any
             }
         }
     };
@@ -109,15 +109,15 @@ const Navbar = () => {
         closed: {
             x: "100%",
             transition: {
-                duration: 0.5,
-                ease: [0.4, 0, 0.2, 1] as any
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1] as any
             }
         },
         open: {
             x: 0,
             transition: {
-                duration: 0.5,
-                ease: [0.4, 0, 0.2, 1] as any
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1] as any
             }
         }
     };

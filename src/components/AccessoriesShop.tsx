@@ -542,7 +542,7 @@ const CartPanel = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200]"
+                        className="fixed inset-0 bg-black/50 sm:backdrop-blur-[2px] z-[200]"
                     />
 
                     {/* Panel */}
@@ -551,7 +551,7 @@ const CartPanel = ({
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
-                        transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
+                        transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
                         className="fixed top-0 right-0 h-dvh w-full max-w-md bg-white shadow-[-20px_0_60px_rgba(0,0,0,0.15)] z-[201] flex flex-col"
                     >
                         {/* Header */}

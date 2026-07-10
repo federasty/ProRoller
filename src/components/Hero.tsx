@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 // Canvas component for the main Hero logo animation (chroma-key transparency)
-const VideoLogoCanvas = ({ src }: { src: string }) => {
+const VideoLogoCanvas = ({ src, isPaused }: { src: string; isPaused: boolean }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animFrameRef = useRef<number>(0);
@@ -18,7 +18,12 @@ const VideoLogoCanvas = ({ src }: { src: string }) => {
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         if (!ctx) return;
 
+        let active = true;
+
         const draw = () => {
+            if (!active) return;
+            if (isPaused) return;
+
             if (video.paused || video.ended) {
                 animFrameRef.current = requestAnimationFrame(draw);
                 return;
@@ -57,19 +62,30 @@ const VideoLogoCanvas = ({ src }: { src: string }) => {
         };
 
         const handlePlay = () => {
-            animFrameRef.current = requestAnimationFrame(draw);
+            if (!isPaused) {
+                animFrameRef.current = requestAnimationFrame(draw);
+            }
         };
 
         video.addEventListener('play', handlePlay);
-        if (!video.paused) {
-            animFrameRef.current = requestAnimationFrame(draw);
+
+        if (!isPaused) {
+            if (video.paused) {
+                video.play().catch(() => {});
+            } else {
+                animFrameRef.current = requestAnimationFrame(draw);
+            }
+        } else {
+            video.pause();
+            cancelAnimationFrame(animFrameRef.current);
         }
 
         return () => {
+            active = false;
             video.removeEventListener('play', handlePlay);
             cancelAnimationFrame(animFrameRef.current);
         };
-    }, []);
+    }, [isPaused]);
 
     return (
         <div className="relative w-full aspect-video">
@@ -91,7 +107,7 @@ const VideoLogoCanvas = ({ src }: { src: string }) => {
 };
 
 // Small floating canvas for the Uruguay map animation (removes Gemini logo + chroma-key)
-const FloatingUruguayMap = () => {
+const FloatingUruguayMap = ({ isPaused }: { isPaused: boolean }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animFrameRef = useRef<number>(0);
@@ -104,7 +120,12 @@ const FloatingUruguayMap = () => {
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         if (!ctx) return;
 
+        let active = true;
+
         const draw = () => {
+            if (!active) return;
+            if (isPaused) return;
+
             if (video.paused || video.ended) {
                 animFrameRef.current = requestAnimationFrame(draw);
                 return;
@@ -141,7 +162,6 @@ const FloatingUruguayMap = () => {
                 const b = data[i + 2];
                 const maxC = Math.max(r, g, b);
                 const minC = Math.min(r, g, b);
-                const brightness = (r + g + b) / 3;
                 const saturation = maxC > 0 ? (maxC - minC) / maxC : 0;
 
                 // If pixel has low saturation it's grey/white background → transparent
@@ -152,7 +172,6 @@ const FloatingUruguayMap = () => {
                     const alpha = Math.round(255 * ((saturation - 0.18) / 0.10));
                     data[i + 3] = Math.max(0, Math.min(255, alpha));
                 }
-                // High saturation pixels (the green map) stay fully opaque
             }
 
             ctx.putImageData(imageData, 0, 0);
@@ -160,19 +179,30 @@ const FloatingUruguayMap = () => {
         };
 
         const handlePlay = () => {
-            animFrameRef.current = requestAnimationFrame(draw);
+            if (!isPaused) {
+                animFrameRef.current = requestAnimationFrame(draw);
+            }
         };
 
         video.addEventListener('play', handlePlay);
-        if (!video.paused) {
-            animFrameRef.current = requestAnimationFrame(draw);
+
+        if (!isPaused) {
+            if (video.paused) {
+                video.play().catch(() => {});
+            } else {
+                animFrameRef.current = requestAnimationFrame(draw);
+            }
+        } else {
+            video.pause();
+            cancelAnimationFrame(animFrameRef.current);
         }
 
         return () => {
+            active = false;
             video.removeEventListener('play', handlePlay);
             cancelAnimationFrame(animFrameRef.current);
         };
-    }, []);
+    }, [isPaused]);
 
     return (
         <motion.div
@@ -208,8 +238,49 @@ const FloatingUruguayMap = () => {
 };
 
 const Hero = () => {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isIntersecting, setIsIntersecting] = useState(true);
+
+    useEffect(() => {
+        const handleMenu = (e: Event) => setIsMenuOpen((e as CustomEvent).detail.isOpen);
+        const handleCart = (e: Event) => setIsCartOpen((e as CustomEvent).detail.isOpen);
+        const handleModal = (e: Event) => setIsModalOpen((e as CustomEvent).detail.isOpen);
+
+        window.addEventListener('menuToggle', handleMenu);
+        window.addEventListener('cartToggle', handleCart);
+        window.addEventListener('productModalToggle', handleModal);
+
+        return () => {
+            window.removeEventListener('menuToggle', handleMenu);
+            window.removeEventListener('cartToggle', handleCart);
+            window.removeEventListener('productModalToggle', handleModal);
+        };
+    }, []);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsIntersecting(entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
+    const isPaused = isMenuOpen || isCartOpen || isModalOpen || !isIntersecting;
+
     return (
-        <section className="relative h-dvh flex items-center justify-center overflow-hidden !pb-0">
+        <section ref={sectionRef} className="relative h-dvh flex items-center justify-center overflow-hidden !pb-0">
             {/* Background Image - Clean and Tenue */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -245,7 +316,7 @@ const Hero = () => {
                 >
                     <div className="relative group w-full">
                         <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <VideoLogoCanvas src="/quiero_que_la_ueda_de_atras_os_sin_logo.mp4" />
+                        <VideoLogoCanvas src="/quiero_que_la_ueda_de_atras_os_sin_logo.mp4" isPaused={isPaused} />
                     </div>
                 </motion.div>
 
@@ -261,7 +332,7 @@ const Hero = () => {
             </div>
 
             {/* Floating Uruguay Map - bottom left */}
-            <FloatingUruguayMap />
+            <FloatingUruguayMap isPaused={isPaused} />
 
             {/* Animated Scroll Down Indicator */}
             <motion.div
