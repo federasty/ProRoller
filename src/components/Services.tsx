@@ -60,6 +60,7 @@ const Services = () => {
                     src="/Cortina-roller.jpg"
                     alt=""
                     fill
+                    sizes="100vw"
                     className="object-cover opacity-30 grayscale blur-[1px]"
                     priority
                 />
@@ -117,6 +118,7 @@ const Services = () => {
                                                     src={service.image}
                                                     alt={service.title}
                                                     fill
+                                                    sizes="(max-width: 768px) 80px, 112px"
                                                     className="object-contain drop-shadow-2xl"
                                                 />
                                             </div>
@@ -165,6 +167,7 @@ const Services = () => {
                                         src="/logo_proroller.png"
                                         alt="Branding"
                                         fill
+                                        sizes="(max-width: 768px) 300px, 600px"
                                         className="grayscale object-contain"
                                     />
                                 </div>

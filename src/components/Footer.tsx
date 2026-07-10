@@ -161,6 +161,7 @@ const Footer = () => {
                                     src="/logo_proroller.png"
                                     alt="ProRoller Logo"
                                     fill
+                                    sizes="(max-width: 768px) 256px, 320px"
                                     className="object-contain object-center lg:object-left"
                                 />
                             </motion.div>

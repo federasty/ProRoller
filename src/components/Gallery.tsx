@@ -32,8 +32,16 @@ const Gallery = () => {
     const [selectedImage, setSelectedImage] = useState<typeof works[0] | null>(null);
 
     useEffect(() => {
+        if (selectedImage !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
         const event = new CustomEvent('productModalToggle', { detail: { isOpen: selectedImage !== null } });
         window.dispatchEvent(event);
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, [selectedImage]);
 
     const [isDragging, setIsDragging] = useState(false);
@@ -269,6 +277,7 @@ const Gallery = () => {
                                 src={work.img}
                                 alt={work.title}
                                 fill
+                                sizes="(max-width: 768px) 200px, 280px"
                                 className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75 group-hover:contrast-[1.1]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 md:p-6 translate-y-5 group-hover:translate-y-0 backdrop-blur-[2px]">
@@ -356,6 +365,7 @@ const Gallery = () => {
                                     src={selectedImage.img}
                                     alt={selectedImage.title}
                                     fill
+                                    sizes="(max-width: 896px) 100vw, 896px"
                                     className="object-contain md:object-cover bg-gray-100"
                                 />
                             </div>

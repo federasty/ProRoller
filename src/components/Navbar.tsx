@@ -50,8 +50,16 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
         const event = new CustomEvent('menuToggle', { detail: { isOpen } });
         window.dispatchEvent(event);
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, [isOpen]);
 
     const navLinks = [
@@ -164,6 +172,7 @@ const Navbar = () => {
                         src="/logo_proroller.png"
                         alt="ProRoller Logo"
                         fill
+                        sizes="(max-width: 768px) 112px, 224px"
                         className="object-contain object-left"
                         priority
                     />

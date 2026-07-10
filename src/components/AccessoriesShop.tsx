@@ -376,6 +376,7 @@ const ProductDetailModal = ({
                                 src={product.image}
                                 alt={product.name}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 450px"
                                 className="object-contain mix-blend-multiply"
                                 priority
                             />
@@ -570,6 +571,7 @@ const CartPanel = ({
                                         src="/logo_proroller.png"
                                         alt="ProRoller Logo"
                                         fill
+                                        sizes="(max-width: 768px) 112px, 128px"
                                         className="object-contain"
                                     />
                                 </div>
@@ -632,6 +634,7 @@ const CartPanel = ({
                                                     src={item.product.image}
                                                     alt={item.product.name}
                                                     fill
+                                                    sizes="48px"
                                                     className="object-contain p-1 mix-blend-multiply"
                                                 />
                                             </div>
@@ -731,8 +734,16 @@ const AccessoriesShop = () => {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     useEffect(() => {
+        if (selectedProduct !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
         const event = new CustomEvent('productModalToggle', { detail: { isOpen: selectedProduct !== null } });
         window.dispatchEvent(event);
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, [selectedProduct]);
 
     // Cargar carrito desde localStorage en el cliente
@@ -780,9 +791,17 @@ const AccessoriesShop = () => {
     }, []);
 
     useEffect(() => {
+        if (isCartOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
         console.log('AccessoriesShop cartToggle dispatching:', isCartOpen);
         const event = new CustomEvent('cartToggle', { detail: { isOpen: isCartOpen } });
         window.dispatchEvent(event);
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, [isCartOpen]);
 
     const addToCart = useCallback((product: Product, size?: SizeOption) => {

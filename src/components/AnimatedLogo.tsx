@@ -33,6 +33,7 @@ const AnimatedLogo = () => {
                         src="/logo_proroller.png"
                         alt=""
                         fill
+                        sizes="(max-width: 768px) 200px, 300px"
                         className="object-contain"
                         priority
                     />
@@ -68,6 +69,7 @@ const AnimatedLogo = () => {
                         src="/logo_proroller.png"
                         alt="ProRoller Logo Static"
                         fill
+                        sizes="(max-width: 768px) 200px, 300px"
                         className="object-contain"
                         priority
                     />

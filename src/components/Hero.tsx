@@ -216,6 +216,7 @@ const Hero = () => {
                     src="/Cortina-roller.jpg"
                     alt="ProRoller Background"
                     fill
+                    sizes="100vw"
                     className="object-cover"
                     priority
                 />
