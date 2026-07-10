@@ -131,7 +131,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative bg-[#0a1a16] pt-20 md:pt-32 pb-10 overflow-hidden text-white/90">
+        <footer className="relative bg-[#0a1a16] pt-20 md:pt-32 pb-32 md:pb-10 overflow-hidden text-white/90">
             {/* Elementos decorativos de fondo - Más sutiles para fondo oscuro */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#fcf9f2]/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
