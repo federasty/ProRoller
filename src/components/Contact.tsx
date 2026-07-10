@@ -11,7 +11,7 @@ const Contact = () => {
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <header className="text-center mb-16 md:mb-24">
+                <header className="text-center mb-12 md:mb-20">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -19,10 +19,10 @@ const Contact = () => {
                     >
                         ¿Hablamos?
                     </motion.span>
-                    <h2 className="text-4xl md:text-6xl font-black text-primary mb-6 tracking-tight uppercase">
+                    <h2 className="text-4xl md:text-5xl font-black text-primary mb-4 tracking-tight uppercase">
                         Contacto
                     </h2>
-                    <div className="w-24 md:w-40 h-1.5 bg-primary mx-auto rounded-full shadow-sm shadow-primary/20"></div>
+                    <div className="w-16 md:w-32 h-1.5 bg-primary mx-auto rounded-full shadow-sm shadow-primary/20"></div>
                 </header>
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start max-w-7xl mx-auto">
@@ -34,16 +34,16 @@ const Contact = () => {
                         transition={{ duration: 0.6 }}
                         className="w-full lg:w-5/12 space-y-8"
                     >
-                        <div className="space-y-4">
-                            <h3 className="text-3xl md:text-4xl font-black text-primary leading-tight">
+                        <div className="space-y-3 text-center lg:text-left">
+                            <h3 className="text-2xl md:text-3xl font-black text-primary leading-tight tracking-tight">
                                 Transformemos tus espacios juntos.
                             </h3>
-                            <p className="text-gray-600 text-lg leading-relaxed">
+                            <p className="text-gray-500 text-sm md:text-lg font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
                                 Estamos para asesorarte en cada paso. Solicitá tu presupuesto sin cargo o dejanos tu consulta y te responderemos a la brevedad.
                             </p>
                         </div>
 
-                        <div className="grid gap-6">
+                        <div className="grid gap-6 w-full">
                             {[
                                 {
                                     icon: <Phone className="w-6 h-6" />,
@@ -63,30 +63,30 @@ const Contact = () => {
                                     value: "9:00 hs a 18:00 hs",
                                     href: "#"
                                 },
-                            ].map((item, index) => (
+                             ].map((item, index) => (
                                 <motion.a
                                     key={index}
                                     href={item.href || "#"}
                                     whileHover={{ x: 10 }}
-                                    className={`flex items-start gap-5 p-6 rounded-2xl border border-gray-100 bg-white/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 group ${!item.href ? "cursor-default" : ""}`}
+                                    className={`flex items-start text-left gap-4 md:gap-5 p-4 md:p-6 rounded-2xl border border-gray-100 bg-white/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 group ${!item.href ? "cursor-default" : ""}`}
                                 >
-                                    <div className="bg-primary/10 text-primary p-4 rounded-xl group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm">
+                                    <div className="bg-primary/10 text-primary p-3 md:p-4 rounded-xl group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm shrink-0">
                                         {item.icon}
                                     </div>
                                     <div className="pt-1">
-                                        <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-1">{item.label}</p>
-                                        <p className="text-lg font-bold text-gray-800">{item.value}</p>
+                                        <p className="text-[9px] md:text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-1">{item.label}</p>
+                                        <p className="text-base md:text-lg font-bold text-gray-800">{item.value}</p>
                                     </div>
                                 </motion.a>
                             ))}
                         </div>
 
-                        <div className="pt-8">
+                        <div className="pt-4 text-center lg:text-left">
                             <motion.a
                                 href="https://wa.me/59895113560?text=Hola%20ProRoller!%20Quiero%20transformar%20mis%20espacios.%20%C2%BFC%C3%B3mo%20podemos%20empezar%3F"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-wider shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all text-sm"
+                                className="inline-flex items-center gap-3 bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-wider shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all text-sm w-full sm:w-auto justify-center"
                             >
                                 <MessageCircle fill="currentColor" className="w-6 h-6" />
                                 Chat directo por WhatsApp
