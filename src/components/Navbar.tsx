@@ -284,23 +284,41 @@ const Navbar = () => {
                         exit={{ opacity: 1, transition: { delay: 0.5 } }}
                         className="fixed inset-0 h-[100dvh] w-full z-[100] overflow-hidden pointer-events-none"
                     >
-                        {/* Cortina Izquierda */}
+                        {/* Cortina Izquierda con mitad izquierda del logo */}
                         <motion.div
                             variants={curtainLeftVariants}
                             initial="closed"
                             animate="open"
                             exit="closed"
                             className="absolute top-0 left-0 w-1/2 h-full bg-white pointer-events-auto overflow-hidden"
-                        />
+                        >
+                            {/* Mitad izquierda del logo pegada al borde derecho de la cortina izquierda */}
+                            <div className="absolute top-[75px] right-0 w-[50px] h-[100px] overflow-hidden">
+                                <img
+                                    src="/logo_proroller.png"
+                                    alt=""
+                                    className="absolute top-0 left-0 w-[100px] h-[100px] max-w-none object-contain"
+                                />
+                            </div>
+                        </motion.div>
 
-                        {/* Cortina Derecha */}
+                        {/* Cortina Derecha con mitad derecha del logo */}
                         <motion.div
                             variants={curtainRightVariants}
                             initial="closed"
                             animate="open"
                             exit="closed"
                             className="absolute top-0 right-0 w-1/2 h-full bg-white pointer-events-auto overflow-hidden"
-                        />
+                        >
+                            {/* Mitad derecha del logo pegada al borde izquierdo de la cortina derecha */}
+                            <div className="absolute top-[75px] left-0 w-[50px] h-[100px] overflow-hidden">
+                                <img
+                                    src="/logo_proroller.png"
+                                    alt=""
+                                    className="absolute top-0 right-0 w-[100px] h-[100px] max-w-none object-contain"
+                                />
+                            </div>
+                        </motion.div>
 
                         {/* Contenido del Menú */}
                         <motion.div
@@ -308,7 +326,7 @@ const Navbar = () => {
                             initial="closed"
                             animate="open"
                             exit="closed"
-                            className="absolute inset-0 h-full w-full flex flex-col pt-[110px] pb-8 pointer-events-auto z-10 overflow-y-auto"
+                            className="absolute inset-0 h-full w-full flex flex-col pt-[180px] pb-8 pointer-events-auto z-10 overflow-y-auto"
                         >
                             {/* Elegant background gradients */}
                             <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
@@ -361,17 +379,6 @@ const Navbar = () => {
                                     </a>
                                 </motion.div>
 
-                                <motion.div
-                                    custom={navLinks.length + 1}
-                                    variants={linkVariants}
-                                    className="mt-8 flex justify-center"
-                                >
-                                    <img
-                                        src="/logo_proroller.png"
-                                        alt="ProRoller Logo"
-                                        className="h-20 w-auto object-contain opacity-90"
-                                    />
-                                </motion.div>
                             </div>
 
                             {/* Social Footer */}
