@@ -1,9 +1,39 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Sparkles } from 'lucide-react';
 
 const VideoShowcase = () => {
+    const videoRef1 = useRef<HTMLVideoElement>(null);
+    const videoRef2 = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1, // Pause when less than 10% of the video is visible
+        };
+
+        const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                const video = entry.target as HTMLVideoElement;
+                if (!entry.isIntersecting) {
+                    video.pause();
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+        if (videoRef1.current) observer.observe(videoRef1.current);
+        if (videoRef2.current) observer.observe(videoRef2.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
         <section id="videos-muestra" className="relative py-24 bg-gradient-to-b from-[#fcf9f2] via-white to-[#fcf9f2] overflow-hidden">
             {/* Elementos decorativos de fondo */}
@@ -39,6 +69,7 @@ const VideoShowcase = () => {
                     >
                         <div className="relative aspect-[9/16] md:aspect-auto md:h-[580px] w-full rounded-2xl overflow-hidden mb-6 bg-transparent">
                             <video
+                                ref={videoRef1}
                                 src="/video%20muestra%201.mp4"
                                 className="absolute inset-0 w-full h-full object-cover rounded-2xl"
                                 playsInline
@@ -73,6 +104,7 @@ const VideoShowcase = () => {
                     >
                         <div className="relative aspect-[9/16] md:aspect-auto md:h-[580px] w-full rounded-2xl overflow-hidden mb-6 bg-transparent">
                             <video
+                                ref={videoRef2}
                                 src="/video%20muestra%202.mp4"
                                 className="absolute inset-0 w-full h-full object-cover rounded-2xl"
                                 playsInline
