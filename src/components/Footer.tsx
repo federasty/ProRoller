@@ -198,7 +198,7 @@ const Footer = () => {
                                 { name: 'Cortinas en Acción', href: '#videos-muestra' },
                                 { name: 'Accesorios', href: '#accesorios' },
                                 { name: 'Solicitar Presupuesto', href: '#contacto' },
-                            ].map((link) => (
+                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
@@ -209,12 +209,6 @@ const Footer = () => {
                                     </Link>
                                 </li>
                             ))}
-                            <li className="pt-4 hidden lg:block">
-                                <div className="inline-flex flex-col items-center lg:items-start bg-white/5 border border-white/10 p-4 rounded-2xl">
-                                    <p className="text-primary font-black uppercase tracking-widest text-[10px] mb-1">Horario de Atención</p>
-                                    <p className="text-white font-bold text-sm">9:00 hs a 18:00 hs</p>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>

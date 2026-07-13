@@ -60,7 +60,7 @@ const Contact = () => {
                                 {
                                     icon: <Clock className="w-6 h-6" />,
                                     label: "Atención al Cliente",
-                                    value: "9:00 hs a 18:00 hs",
+                                    value: "Lunes a Viernes de 9:00 a 18:00 hs\nSábados de 9:00 a 12:00 hs",
                                     href: "#"
                                 },
                              ].map((item, index) => (
@@ -75,7 +75,7 @@ const Contact = () => {
                                     </div>
                                     <div className="pt-1">
                                         <p className="text-[9px] md:text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-1">{item.label}</p>
-                                        <p className="text-base md:text-lg font-bold text-gray-800">{item.value}</p>
+                                        <p className="text-base md:text-lg font-bold text-gray-800 whitespace-pre-line">{item.value}</p>
                                     </div>
                                 </motion.a>
                             ))}
