@@ -214,16 +214,27 @@ const Footer = () => {
                 </div>
 
                 {/* Footer Bottom Refined */}
-                <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <div className="pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 items-center">
+                    <div className="hidden md:block"></div>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center">
                         <p className="text-gray-500 text-sm font-medium">
                             © {currentYear} <span className="text-white font-bold">ProRoller Uruguay</span>
                         </p>
                         <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-white/10"></div>
-                        <p className="text-gray-600 text-xs uppercase tracking-widest font-black">Excelencia en Cortinas</p>
+                        <p className="text-gray-500 text-sm font-medium">
+                            Desarrollado por{" "}
+                            <a
+                                href="https://roots-dev.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:underline hover:text-primary/80 transition-all font-bold"
+                            >
+                                ROOTS_DEV
+                            </a>
+                        </p>
                     </div>
 
-                    <div className="flex items-center gap-10">
+                    <div className="flex justify-center md:justify-end gap-10">
                         <motion.button
                             onClick={scrollToTop}
                             whileHover={{ scale: 1.1, backgroundColor: '#007b5e', borderColor: '#007b5e' }}

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence, useMotionValue, useAnimationFrame, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useAnimationFrame, useTransform } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 
 const works = [
@@ -49,7 +49,7 @@ const Gallery = () => {
 
     const sliderRef = useRef<HTMLUListElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const sectionRef = useRef<HTMLElement>(null);
+
     const lastX = useRef<number>(0);
     const baseX = useRef<number>(0);
     const xTranslation = useMotionValue(0);
@@ -57,11 +57,7 @@ const Gallery = () => {
     const [isDragBarDragging, setIsDragBarDragging] = useState(false);
     const trackRef = useRef<HTMLDivElement>(null);
 
-    // Base scroll for reference (if needed in future), but removed displacement effect
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"]
-    });
+
 
     const calculateWidth = useCallback(() => {
         if (!sliderRef.current) return 0;
@@ -232,7 +228,7 @@ const Gallery = () => {
     return (
         <section
             id="nuestrosTrabajos"
-            ref={sectionRef}
+
             className="relative py-24 bg-gradient-to-b from-white via-[#fcf9f2] to-[#fcf9f2] overflow-hidden"
         >
             <div className="container mx-auto px-6 relative z-10 mb-16">
