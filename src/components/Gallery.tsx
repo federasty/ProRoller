@@ -93,7 +93,7 @@ const Gallery = () => {
     }, [calculateWidth]);
 
     useAnimationFrame((_time, delta) => {
-        if (isDragging || isDragBarDragging || !width) return;
+        if (isDragging || isDragBarDragging || !width || selectedImage) return;
 
         // 45 pixels per second - smooth and steady base
         const moveBy = (delta / 1000) * 45;
@@ -339,7 +339,7 @@ const Gallery = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl"
+                        className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
                         onClick={() => setSelectedImage(null)}
                     >
                         <motion.div
