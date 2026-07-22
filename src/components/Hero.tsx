@@ -280,7 +280,7 @@ const Hero = () => {
     const isPaused = isMenuOpen || isCartOpen || isModalOpen || !isIntersecting;
 
     return (
-        <section ref={sectionRef} className="relative h-dvh flex items-center justify-center overflow-hidden !pb-0">
+        <section ref={sectionRef} className="relative min-h-[100dvh] h-auto md:h-dvh flex items-center justify-center overflow-hidden !pb-0 pt-16 md:pt-0">
             {/* Background Image - Clean and Tenue */}
             <div className="absolute inset-0 z-0">
                 <Image
