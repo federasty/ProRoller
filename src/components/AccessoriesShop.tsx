@@ -66,7 +66,7 @@ const products: Product[] = [
         description: '',
         price: 570,
         icon: <Ruler size={28} />,
-        image: '/products/riel extensible.jpeg',
+        image: '/products/riel extensible.jpg',
         category: 'Rieles',
         bgColor: '#ffffff',
         sizes: [
