@@ -52,7 +52,7 @@ const Services = () => {
         <section
             id="servicios"
             ref={containerRef}
-            className="relative h-[300vh] md:h-[250vh] bg-gradient-to-b from-[#fcf9f2] via-[#fcf9f2] to-white !pt-0"
+            className="relative py-12 md:py-0 min-h-screen md:h-[250vh] bg-gradient-to-b from-[#fcf9f2] via-[#fcf9f2] to-white !pt-0"
         >
             {/* Fondo de transición mejorado */}
             <div className="absolute top-0 left-0 w-full h-[60vh] z-0 overflow-hidden pointer-events-none">
@@ -67,12 +67,12 @@ const Services = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#fcf9f2]/80 to-[#fcf9f2]"></div>
             </div>
 
-            <div className="sticky top-0 h-screen w-full overflow-hidden z-30 flex flex-col items-center">
+            <div className="relative md:sticky top-0 min-h-screen md:h-screen w-full overflow-visible md:overflow-hidden z-30 flex flex-col items-center">
 
                 {/* CONTENIDO PRINCIPAL */}
                 <motion.div
                     style={{ opacity: contentOpacity, scale: contentScale }}
-                    className="w-full h-full flex flex-col items-center pt-32 md:pt-44 pb-10 z-10"
+                    className="w-full h-full flex flex-col items-center pt-20 md:pt-44 pb-10 z-10"
                 >
                     <div className="container mx-auto px-4 md:px-8 flex flex-col items-center h-full max-w-7xl">
                         <header className="text-center mb-10 md:mb-16 flex-shrink-0">
@@ -90,8 +90,8 @@ const Services = () => {
                         </header>
 
                         {/* Contenedor scrolleable con indicador visual */}
-                        <div className="relative w-full flex-grow overflow-hidden flex flex-col pt-4">
-                            <div className="w-full h-full overflow-y-auto px-4 pb-32 custom-scrollbar scroll-smooth">
+                        <div className="relative w-full flex-grow flex flex-col pt-4">
+                            <div className="w-full h-full overflow-visible md:overflow-y-auto px-4 pb-16 md:pb-32 custom-scrollbar scroll-smooth">
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                                     {services.map((service, index) => (
                                         <motion.div

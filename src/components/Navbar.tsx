@@ -156,7 +156,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 pt-[env(safe-area-inset-top,0px)] ${scrolled ? 'bg-white/95 border-b border-gray-100 shadow-sm py-2' : 'bg-transparent py-4'}`}>
+        <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 pt-[max(1.25rem,env(safe-area-inset-top,0px))] ${scrolled ? 'bg-white/95 border-b border-gray-100 shadow-sm py-3 md:py-4' : 'bg-transparent py-5 md:py-7'}`}>
             <div className="w-full px-4 md:px-10 flex justify-between items-center relative z-[110]">
                 {/* Logo */}
                 <Link

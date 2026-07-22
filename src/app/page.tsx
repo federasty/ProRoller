@@ -10,7 +10,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen overflow-x-hidden w-full max-w-full">
       <Navbar />
       <Hero />
       <Services />
