@@ -1,10 +1,14 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Sparkles, Play, Volume2, VolumeX } from 'lucide-react';
 
 interface VideoCardProps {
+    id: string;
+    activeVideoId: string | null;
+    onPlayActive: (id: string) => void;
     title: string;
     description: string;
     videoSrc: string;
@@ -15,6 +19,9 @@ interface VideoCardProps {
 }
 
 const VideoCard = ({
+    id,
+    activeVideoId,
+    onPlayActive,
     title,
     description,
     videoSrc,
@@ -27,6 +34,16 @@ const VideoCard = ({
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
     const [hasStarted, setHasStarted] = useState(false);
+
+    // Pausar si otro video pasó a estar activo
+    useEffect(() => {
+        if (activeVideoId && activeVideoId !== id && isPlaying) {
+            if (videoRef.current) {
+                videoRef.current.pause();
+            }
+            setIsPlaying(false);
+        }
+    }, [activeVideoId, id, isPlaying]);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -55,6 +72,32 @@ const VideoCard = ({
         };
     }, []);
 
+    const lastTapTimeRef = useRef<number>(0);
+
+    const handlePlayerClick = (e: React.MouseEvent) => {
+        // Si no está en reproducción, 1 toque inicia la reproducción
+        if (!isPlaying) {
+            togglePlay();
+            return;
+        }
+
+        const now = Date.now();
+        const DOUBLE_TAP_DELAY = 320; // milisegundos para detectar doble toque
+
+        if (now - lastTapTimeRef.current < DOUBLE_TAP_DELAY) {
+            // Doble toque: Pausar y detener el video (volver a la portada)
+            e.stopPropagation();
+            if (videoRef.current) {
+                videoRef.current.pause();
+            }
+            setIsPlaying(false);
+            lastTapTimeRef.current = 0;
+        } else {
+            // Un solo toque: Registrar el tiempo y permitir que el navegador muestre/oculte los controles nativos
+            lastTapTimeRef.current = now;
+        }
+    };
+
     const togglePlay = () => {
         const video = videoRef.current;
         if (!video) return;
@@ -63,6 +106,7 @@ const VideoCard = ({
             video.pause();
             setIsPlaying(false);
         } else {
+            onPlayActive(id);
             setHasStarted(true);
             const playPromise = video.play();
             if (playPromise !== undefined) {
@@ -96,7 +140,7 @@ const VideoCard = ({
         >
             <div
                 className="relative aspect-[9/16] md:aspect-auto md:h-[580px] w-full rounded-2xl overflow-hidden mb-6 bg-slate-900 group/player cursor-pointer select-none"
-                onClick={togglePlay}
+                onClick={handlePlayerClick}
             >
                 <video
                     ref={videoRef}
@@ -110,10 +154,26 @@ const VideoCard = ({
                     muted={isMuted}
                     preload="metadata"
                     controls={hasStarted}
-                    onPlay={() => setIsPlaying(true)}
+                    onPlay={() => {
+                        onPlayActive(id);
+                        setIsPlaying(true);
+                    }}
                     onPause={() => setIsPlaying(false)}
                     onEnded={() => setIsPlaying(false)}
                 />
+
+                {/* Logo permanente como marca de agua en la esquina superior izquierda */}
+                <div className="absolute top-4 left-4 md:top-6 md:left-6 z-20 pointer-events-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                    <div className="relative h-10 w-36 md:h-14 md:w-48">
+                        <Image
+                            src="/logo_proroller.png"
+                            alt="ProRoller Logo"
+                            fill
+                            className="object-contain object-left"
+                            priority
+                        />
+                    </div>
+                </div>
 
                 {/* Overlay con Portada y Botón Play animado */}
                 <AnimatePresence>
@@ -123,15 +183,8 @@ const VideoCard = ({
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.25 }}
-                            className="absolute inset-0 z-10 flex flex-col items-center justify-between p-6 bg-gradient-to-t from-black/80 via-black/20 to-black/30 backdrop-blur-[2px]"
+                            className="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 bg-gradient-to-t from-black/80 via-black/20 to-black/30 backdrop-blur-[2px]"
                         >
-                            {/* Insignia superior */}
-                            <div className="w-full flex justify-between items-center">
-                                <span className="text-[10px] uppercase font-bold tracking-widest bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full border border-white/20">
-                                    ProRoller® HD
-                                </span>
-                            </div>
-
                             {/* Botón de Reproducción Central */}
                             <div className="flex flex-col items-center gap-3">
                                 <motion.div
@@ -145,12 +198,6 @@ const VideoCard = ({
                                 <span className="text-white text-xs md:text-sm font-semibold tracking-wide drop-shadow-md bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
                                     Tocar para reproducir
                                 </span>
-                            </div>
-
-                            {/* Footer informativo */}
-                            <div className="w-full text-white/90 text-xs font-medium flex justify-between items-end">
-                                <span>Demostración en vivo</span>
-                                <span className="text-emerald-300 font-bold">100% HD</span>
                             </div>
                         </motion.div>
                     )}
@@ -187,6 +234,12 @@ const VideoCard = ({
 };
 
 const VideoShowcase = () => {
+    const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+
+    const handlePlayActive = (id: string) => {
+        setActiveVideoId(id);
+    };
+
     return (
         <section id="videos-muestra" className="relative py-24 bg-gradient-to-b from-[#fcf9f2] via-white to-[#fcf9f2] overflow-hidden">
             {/* Elementos decorativos de fondo */}
@@ -214,6 +267,9 @@ const VideoShowcase = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto">
                     {/* VIDEO 1 */}
                     <VideoCard
+                        id="video-1"
+                        activeVideoId={activeVideoId}
+                        onPlayActive={handlePlayActive}
                         title="Confección e Instalación a Medida"
                         description="Mirá de cerca la textura de nuestras telas seleccionadas y la precisión en la caída y alineación perfecta de cada paño."
                         videoSrc="/video%20muestra%201.mp4"
@@ -225,6 +281,9 @@ const VideoShowcase = () => {
 
                     {/* VIDEO 2 */}
                     <VideoCard
+                        id="video-2"
+                        activeVideoId={activeVideoId}
+                        onPlayActive={handlePlayActive}
                         title="Suavidad y Control Térmico"
                         description="Observá el mecanismo premium de enrollado y cómo la tela blackout aísla completamente la luz externa, brindando absoluta privacidad y control térmico."
                         videoSrc="/video%20muestra%202.mp4"
@@ -240,4 +299,5 @@ const VideoShowcase = () => {
 };
 
 export default VideoShowcase;
+
 
