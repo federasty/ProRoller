@@ -82,10 +82,10 @@ const Services = () => {
                 {/* CONTENIDO PRINCIPAL */}
                 <motion.div
                     style={{ opacity: contentOpacity, scale: contentScale }}
-                    className="w-full h-full flex flex-col items-center pt-24 md:pt-36 pb-6 md:pb-10 z-10"
+                    className="w-full h-full flex flex-col items-center pt-32 md:pt-36 pb-6 md:pb-10 z-10"
                 >
                     <div className="container mx-auto px-4 md:px-8 flex flex-col items-center h-full max-w-7xl">
-                        <header className="text-center mt-6 md:mt-[12vh] mb-4 md:mb-8 flex-shrink-0">
+                        <header className="text-center mt-20 md:mt-[12vh] mb-4 md:mb-8 flex-shrink-0">
                             <motion.span
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const Services = () => {
                         </header>
 
                         {/* Contenedor scrolleable con indicador visual */}
-                        <div className="relative w-full flex-grow flex flex-col max-w-5xl mx-auto h-[54vh] sm:h-[58vh] md:h-[60vh] bg-white/40 backdrop-blur-md rounded-3xl p-2 md:p-4 border border-white/60 shadow-xl shadow-primary/5">
+                        <div className="relative w-full flex-grow flex flex-col max-w-5xl mx-auto mt-4 md:mt-0 h-[54vh] sm:h-[58vh] md:h-[60vh] bg-white/40 backdrop-blur-md rounded-3xl p-2 md:p-4 border border-white/60 shadow-xl shadow-primary/5">
                             {/* Gradiente superior para sugerir contenido previo */}
                             <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-[#fcf9f2]/90 to-transparent pointer-events-none z-20 rounded-t-3xl"></div>
 
