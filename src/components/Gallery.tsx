@@ -231,19 +231,19 @@ const Gallery = () => {
 
             className="relative pt-0 md:pt-2 pb-24 bg-gradient-to-b from-white via-[#fcf9f2] to-[#fcf9f2] overflow-hidden"
         >
-            <div className="container mx-auto px-6 relative z-10 mb-16">
+            <div className="container mx-auto px-6 relative z-10 mb-6 md:mb-16 -mt-8 md:mt-0">
                 <header className="text-center">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        className="text-primary font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-3 block"
+                        className="text-primary font-bold tracking-[0.2em] uppercase text-[10px] md:text-sm mb-2 md:mb-3 block"
                     >
                         Instalaciones Destacadas
                     </motion.span>
-                    <h2 className="text-4xl md:text-6xl font-black text-primary mb-6 tracking-tight uppercase">
+                    <h2 className="text-3xl md:text-6xl font-black text-primary mb-3 md:mb-6 tracking-tight uppercase">
                         Nuestros Trabajos
                     </h2>
-                    <div className="w-24 md:w-40 h-1.5 bg-primary mx-auto rounded-full shadow-sm shadow-primary/20"></div>
+                    <div className="w-20 md:w-40 h-1.5 bg-primary mx-auto rounded-full shadow-sm shadow-primary/20"></div>
                 </header>
             </div>
 
