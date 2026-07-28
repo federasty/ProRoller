@@ -229,7 +229,7 @@ const Gallery = () => {
         <section
             id="nuestrosTrabajos"
 
-            className="relative py-24 bg-gradient-to-b from-white via-[#fcf9f2] to-[#fcf9f2] overflow-hidden"
+            className="relative pt-0 md:pt-2 pb-24 bg-gradient-to-b from-white via-[#fcf9f2] to-[#fcf9f2] overflow-hidden"
         >
             <div className="container mx-auto px-6 relative z-10 mb-16">
                 <header className="text-center">

@@ -44,15 +44,15 @@ const Services = () => {
         offset: ["start start", "end end"]
     });
 
-    const curtainY = useTransform(scrollYProgress, [0, 0.4], ["0%", "-100%"]);
-    const contentOpacity = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
-    const contentScale = useTransform(scrollYProgress, [0.1, 0.4], [0.95, 1]);
+    const curtainY = useTransform(scrollYProgress, [0, 0.9], ["0%", "-100%"]);
+    const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [0.85, 1]);
+    const contentScale = useTransform(scrollYProgress, [0, 0.25], [0.97, 1]);
 
     return (
         <section
             id="servicios"
             ref={containerRef}
-            className="relative py-12 md:py-0 min-h-screen md:h-[250vh] bg-gradient-to-b from-[#fcf9f2] via-[#fcf9f2] to-white !pt-0"
+            className="relative py-12 md:py-0 min-h-screen md:h-[115vh] bg-gradient-to-b from-[#fcf9f2] via-[#fcf9f2] to-white !pt-0"
         >
             {/* Fondo de transición mejorado */}
             <div className="absolute top-0 left-0 w-full h-[60vh] z-0 overflow-hidden pointer-events-none">
@@ -72,10 +72,10 @@ const Services = () => {
                 {/* CONTENIDO PRINCIPAL */}
                 <motion.div
                     style={{ opacity: contentOpacity, scale: contentScale }}
-                    className="w-full h-full flex flex-col items-center pt-20 md:pt-44 pb-10 z-10"
+                    className="w-full h-full flex flex-col items-center pt-36 md:pt-44 pb-10 z-10"
                 >
                     <div className="container mx-auto px-4 md:px-8 flex flex-col items-center h-full max-w-7xl">
-                        <header className="text-center mb-10 md:mb-16 flex-shrink-0">
+                        <header className="text-center mt-20 md:mt-[20vh] mb-8 md:mb-12 flex-shrink-0">
                             <motion.span
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -92,48 +92,48 @@ const Services = () => {
                         {/* Contenedor scrolleable con indicador visual */}
                         <div className="relative w-full flex-grow flex flex-col pt-4">
                             <div className="w-full h-full overflow-visible md:overflow-y-auto px-4 pb-16 md:pb-32 custom-scrollbar scroll-smooth">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
                                     {services.map((service, index) => (
                                         <motion.div
                                             key={index}
                                             initial={{ opacity: 0, y: 30 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             whileHover={{
-                                                y: -15,
-                                                scale: 1.03,
-                                                transition: { duration: 0.4, ease: "easeOut" }
+                                                y: -10,
+                                                scale: 1.02,
+                                                transition: { duration: 0.3, ease: "easeOut" }
                                             }}
                                             transition={{ duration: 0.5, delay: index * 0.1 }}
                                             viewport={{ once: true }}
-                                            className="group relative bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(0,123,94,0.18)] transition-all duration-500 border border-white flex flex-col items-center text-center overflow-hidden min-h-[260px] md:min-h-[320px] cursor-pointer"
+                                            className="group relative bg-white/95 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_60px_rgba(0,123,94,0.18)] transition-all duration-500 border border-white flex flex-col items-center text-center overflow-hidden min-h-[220px] md:min-h-[250px] cursor-pointer"
                                         >
                                             {/* Glow superior dinámico */}
                                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                                             {/* Círculo de luz ambiental */}
-                                            <div className="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/25 group-hover:scale-125 transition-all duration-700"></div>
+                                            <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/25 group-hover:scale-125 transition-all duration-700"></div>
 
-                                            <div className="w-20 h-20 md:w-28 md:h-28 relative mb-6 md:mb-10 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+                                            <div className="w-16 h-16 md:w-20 md:h-20 relative mb-4 md:mb-6 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
                                                 <Image
                                                     src={service.image}
                                                     alt={service.title}
                                                     fill
-                                                    sizes="(max-width: 768px) 80px, 112px"
+                                                    sizes="(max-width: 768px) 64px, 80px"
                                                     className="object-contain drop-shadow-2xl"
                                                 />
                                             </div>
 
                                             <div className="relative z-10">
-                                                <h3 className="text-xl md:text-3xl font-black text-gray-900 mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight leading-none">
+                                                <h3 className="text-lg md:text-2xl font-black text-gray-900 mb-2 md:mb-3 group-hover:text-primary transition-colors duration-300 tracking-tight leading-none">
                                                     {service.title}
                                                 </h3>
-                                                <p className="text-gray-600 text-sm md:text-lg leading-relaxed font-semibold italic">
+                                                <p className="text-gray-600 text-xs md:text-base leading-relaxed font-semibold italic">
                                                     {service.description}
                                                 </p>
                                             </div>
 
                                             {/* Zócalo de acento activo */}
-                                            <div className="absolute bottom-0 left-0 w-0 h-2 bg-primary group-hover:w-full transition-all duration-700 ease-in-out shadow-[0_-5px_20px_rgba(0,123,94,0.4)]"></div>
+                                            <div className="absolute bottom-0 left-0 w-0 h-1.5 bg-primary group-hover:w-full transition-all duration-700 ease-in-out shadow-[0_-5px_20px_rgba(0,123,94,0.4)]"></div>
                                         </motion.div>
                                     ))}
                                 </div>
